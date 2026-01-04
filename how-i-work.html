@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  JOSHUA STRINGER - PORTFOLIO WEBSITE
+  ============================================================================
+
+  Copyright (c) 2025 Joshua Stringer. All rights reserved.
+
+  This source code and design are the intellectual property of Joshua Stringer.
+  Unauthorized copying, modification, distribution, or use of this code,
+  design, or any derivative works is strictly prohibited without explicit
+  written permission from the author.
+
+  Contact: josh.stringer62@gmail.com
+  LinkedIn: linkedin.com/in/josh-stringer
+
+  ============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How I Work | Joshua Stringer</title>
+    <meta name="description" content="My approach to L&D: how I diagnose problems, decide when AI is appropriate, and measure success.">
+    <meta name="author" content="Joshua Stringer">
+    <meta name="copyright" content="Copyright (c) 2025 Joshua Stringer. All rights reserved.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jstringer.com/how-i-work.html">
+    <meta property="og:title" content="How I Work | Joshua Stringer">
+    <meta property="og:description" content="My approach to L&D: how I diagnose problems, decide when AI is appropriate, and measure success.">
+    <meta property="og:image" content="https://jstringer.com/profile-headshot.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ3Y65TGTY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DQ3Y65TGTY');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page Header */
+        .page-header {
+            padding: 140px 40px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+        }
+
+        .page-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        /* Content Sections */
+        .content {
+            padding: 0 40px 100px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 20px;
+            padding: 48px;
+            margin-bottom: 32px;
+        }
+
+        .section-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Lists */
+        .question-list {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .question-list li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            padding: 12px 0;
+            padding-left: 28px;
+            position: relative;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .question-list li:last-child {
+            border-bottom: none;
+        }
+
+        .question-list li::before {
+            content: '?';
+            position: absolute;
+            left: 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Two Column Lists */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .col {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .col-header {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .col.do .col-header {
+            color: var(--accent);
+        }
+
+        .col.dont .col-header {
+            color: var(--negative);
+        }
+
+        .col ul {
+            list-style: none;
+        }
+
+        .col li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .col.do li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 12px;
+        }
+
+        .col.dont li::before {
+            content: '\2715';
+            position: absolute;
+            left: 0;
+            color: var(--negative);
+            font-size: 12px;
+        }
+
+        /* Metric List */
+        .metric-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .metric-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 10px;
+            padding: 16px 20px;
+        }
+
+        .metric-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 40px;
+        }
+
+        .metric-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        /* Don't Do List */
+        .dont-list {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .dont-list li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            padding: 16px 0;
+            padding-left: 32px;
+            position: relative;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .dont-list li:last-child {
+            border-bottom: none;
+        }
+
+        .dont-list li::before {
+            content: '\2715';
+            position: absolute;
+            left: 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            color: var(--negative);
+            font-size: 14px;
+        }
+
+        .dont-list li strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Callout */
+        .callout {
+            background: var(--accent-dim);
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 24px;
+        }
+
+        .callout p {
+            color: var(--text-primary);
+            margin-bottom: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .page-header { padding: 100px 24px 40px; }
+            .page-title { font-size: 36px; }
+            .content { padding: 0 24px 60px; }
+            .section { padding: 32px; }
+            .two-col { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ownership Watermark - JSTR-2025-HIW-M4N5O6 -->
+    <div data-owner="joshua-stringer" data-site-id="jstr-2025-hiw" data-created="2025" aria-hidden="true" style="display:none!important"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">Josh Stringer</a>
+        <ul class="nav-links">
+            <li class="nav-dropdown">
+                <a href="portfolio.html">Portfolio</a>
+                <div class="dropdown-menu">
+                    <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="dropdown-label">Case Study</span></a>
+                    <a href="portfolio-roi.html">The ROI Question<span class="dropdown-label">Framework</span></a>
+                    <a href="portfolio-maturity.html">L&D Maturity Model<span class="dropdown-label">Diagnostic</span></a>
+                    <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="dropdown-label">Journey Map</span></a>
+                </div>
+            </li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="how-i-work.html" class="active">How I Work</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Get in touch</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="portfolio.html">Portfolio</a>
+        <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="mobile-dropdown-label">Case Study</span></a>
+        <a href="portfolio-roi.html">The ROI Question<span class="mobile-dropdown-label">Framework</span></a>
+        <a href="portfolio-maturity.html">L&D Maturity Model<span class="mobile-dropdown-label">Diagnostic</span></a>
+        <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="mobile-dropdown-label">Journey Map</span></a>
+        <a href="about.html">About</a>
+        <a href="how-i-work.html">How I Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">How I Work</h1>
+        <p class="page-subtitle">Not a methodology deck. Just how I actually operate.</p>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+        <!-- Diagnose Problems -->
+        <section class="section">
+            <div class="section-icon">🔍</div>
+            <h2 class="section-title">How I Diagnose Problems</h2>
+            <p>I don't start with solutions. I start with questions.</p>
+
+            <ul class="question-list">
+                <li>What's the actual business problem? (Not the training request. The problem.)</li>
+                <li>What's been tried before? Why didn't it work?</li>
+                <li>Who are the real stakeholders? Who has veto power?</li>
+                <li>What does success look like in numbers, not feelings?</li>
+            </ul>
+
+            <div class="callout">
+                <p><strong>Most training fails because someone skipped this part.</strong></p>
+            </div>
+        </section>
+
+        <!-- AI Decision -->
+        <section class="section">
+            <div class="section-icon">🤖</div>
+            <h2 class="section-title">How I Decide When AI Is Appropriate</h2>
+            <p>AI isn't always the answer. I'm pragmatic about when it makes sense.</p>
+
+            <div class="two-col">
+                <div class="col do">
+                    <div class="col-header">I use AI when</div>
+                    <ul>
+                        <li>The task is repetitive with real volume</li>
+                        <li>Quality can be verified before it ships</li>
+                        <li>The team can maintain it without me</li>
+                        <li>It actually saves time vs. doing it manually</li>
+                    </ul>
+                </div>
+                <div class="col dont">
+                    <div class="col-header">I don't use AI when</div>
+                    <ul>
+                        <li>It's a novelty play with no real ROI</li>
+                        <li>Stakeholders won't understand or trust it</li>
+                        <li>It creates dependencies nobody can support</li>
+                        <li>Manual is actually faster for single tasks</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Measure Success -->
+        <section class="section">
+            <div class="section-icon">📊</div>
+            <h2 class="section-title">How I Measure Success</h2>
+            <p>Before anything gets built, I define three things:</p>
+
+            <div class="metric-list">
+                <div class="metric-item">
+                    <span class="metric-num">1</span>
+                    <span class="metric-text"><strong>The baseline.</strong> Where are we now?</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-num">2</span>
+                    <span class="metric-text"><strong>The target metric.</strong> What should change?</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-num">3</span>
+                    <span class="metric-text"><strong>The timeline.</strong> When do we check?</span>
+                </div>
+            </div>
+
+            <div class="callout">
+                <p><strong>If we can't measure it, we don't build it.</strong> Completions aren't success. Behavior change is.</p>
+            </div>
+        </section>
+
+        <!-- What I Don't Do -->
+        <section class="section">
+            <div class="section-icon">🚫</div>
+            <h2 class="section-title">What I Don't Do</h2>
+
+            <ul class="dont-list">
+                <li><strong>Hype.</strong> I don't chase trends or sell vaporware.</li>
+                <li><strong>Vanity metrics.</strong> "100% completion rate" means nothing if performance didn't change.</li>
+                <li><strong>Drop and disappear.</strong> I build things that teams can actually maintain.</li>
+                <li><strong>Overcomplicate.</strong> Simple systems that work beat complex systems that don't.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="how-i-work.html">How I Work</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://www.linkedin.com/in/josh-stringer/" target="_blank">LinkedIn</a>
+        </div>
+        <p class="footer-copy">Joshua Stringer · Gilbert, AZ · josh.stringer62@gmail.com</p>
+        <p class="footer-copyright">© 2025 Joshua Stringer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Ownership fingerprint
+        console.log('%c🔒 This site is the intellectual property of Joshua Stringer', 'font-size: 14px; font-weight: bold; color: #4ecb8d;');
+        console.log('%cUnique ID: JSTR-2025-HIW-M4N5O6 | © 2025 All Rights Reserved', 'font-size: 11px; color: #888;');
+        console.log('%cUnauthorized copying or reproduction is prohibited.', 'font-size: 11px; color: #e85c5c;');
+        console.log('%cContact: josh.stringer62@gmail.com', 'font-size: 11px; color: #888;');
+    </script>
+</body>
+</html>

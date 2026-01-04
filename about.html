@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  JOSHUA STRINGER - PORTFOLIO WEBSITE
+  ============================================================================
+
+  Copyright (c) 2025 Joshua Stringer. All rights reserved.
+
+  This source code and design are the intellectual property of Joshua Stringer.
+  Unauthorized copying, modification, distribution, or use of this code,
+  design, or any derivative works is strictly prohibited without explicit
+  written permission from the author.
+
+  Contact: josh.stringer62@gmail.com
+  LinkedIn: linkedin.com/in/josh-stringer
+
+  ============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Joshua Stringer</title>
+    <meta name="description" content="L&D leader with 5+ years building learning systems across government, healthcare, and SaaS. AI when it makes sense.">
+    <meta name="author" content="Joshua Stringer">
+    <meta name="copyright" content="Copyright (c) 2025 Joshua Stringer. All rights reserved.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jstringer.com/about.html">
+    <meta property="og:title" content="About | Joshua Stringer">
+    <meta property="og:description" content="L&D leader with 5+ years building learning systems across government, healthcare, and SaaS. AI when it makes sense.">
+    <meta property="og:image" content="https://jstringer.com/profile-headshot.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ3Y65TGTY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DQ3Y65TGTY');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page Header */
+        .page-header {
+            padding: 140px 40px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+        }
+
+        .page-subtitle {
+            font-size: 22px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Story Section */
+        .story {
+            padding: 0 40px 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .story-content {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 20px;
+            padding: 48px;
+        }
+
+        .story-content p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .story-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-content p.lead {
+            font-size: 20px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .story-content p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .story-content p em {
+            color: var(--accent);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .story-highlight {
+            background: var(--accent-dim);
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .story-highlight p {
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* Capabilities Section */
+        .capabilities {
+            padding: 100px 40px;
+            background: var(--bg-elevated);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .capabilities-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 48px;
+        }
+
+        .caps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .cap-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 18px;
+            padding: 36px;
+            transition: all 0.25s ease;
+        }
+
+        .cap-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .cap-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .cap-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .cap-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Tools Section */
+        .tools {
+            padding: 100px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .tool-group {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .tool-group-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .tool-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tool-item {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Resume Download */
+        .resume-section {
+            padding: 100px 40px;
+            text-align: center;
+            background: var(--bg-elevated);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .resume-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .resume-section p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .page-header { padding: 100px 24px 40px; }
+            .page-title { font-size: 36px; }
+            .story { padding: 0 24px 60px; }
+            .story-content { padding: 32px; }
+            .capabilities { padding: 80px 24px; }
+            .caps-grid { grid-template-columns: 1fr; gap: 20px; }
+            .tools { padding: 80px 24px; }
+            .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .resume-section { padding: 80px 24px; }
+        }
+
+        @media (max-width: 600px) {
+            .tools-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ownership Watermark - JSTR-2025-ABT-G7H8I9 -->
+    <div data-owner="joshua-stringer" data-site-id="jstr-2025-abt" data-created="2025" aria-hidden="true" style="display:none!important"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">Josh Stringer</a>
+        <ul class="nav-links">
+            <li class="nav-dropdown">
+                <a href="portfolio.html">Portfolio</a>
+                <div class="dropdown-menu">
+                    <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="dropdown-label">Case Study</span></a>
+                    <a href="portfolio-roi.html">The ROI Question<span class="dropdown-label">Framework</span></a>
+                    <a href="portfolio-maturity.html">L&D Maturity Model<span class="dropdown-label">Diagnostic</span></a>
+                    <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="dropdown-label">Journey Map</span></a>
+                </div>
+            </li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="how-i-work.html">How I Work</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Get in touch</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="portfolio.html">Portfolio</a>
+        <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="mobile-dropdown-label">Case Study</span></a>
+        <a href="portfolio-roi.html">The ROI Question<span class="mobile-dropdown-label">Framework</span></a>
+        <a href="portfolio-maturity.html">L&D Maturity Model<span class="mobile-dropdown-label">Diagnostic</span></a>
+        <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="mobile-dropdown-label">Journey Map</span></a>
+        <a href="about.html">About</a>
+        <a href="how-i-work.html">How I Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">About</h1>
+        <p class="page-subtitle">I fix L&D problems. Usually the ones people have worked around for years.</p>
+    </header>
+
+    <!-- Story -->
+    <section class="story">
+        <div class="story-content">
+            <p class="lead">Five years in L&D. Government, healthcare, SaaS. I've seen the same problems everywhere.</p>
+
+            <p>Content requests pile up faster than you can build. Nobody can prove training actually works. The LMS is a graveyard. Onboarding takes forever and people still don't know what they're doing.</p>
+
+            <p><strong>I fix these things.</strong> By working closely with stakeholders, not dropping shiny tools and disappearing.</p>
+
+            <p>At Pearl Interactive Network, I ran L&D for a 1,000+ person org with a lean team. The math didn't work with traditional methods. So I built content pipelines using AI instead. Research, drafts, assessments, images. AI handled the repetitive stuff. My team handled what matters: strategy, quality, stakeholder alignment.</p>
+
+            <div class="story-highlight">
+                <p>Production time dropped <em>75%</em>. We got ahead of the backlog instead of drowning in it.</p>
+            </div>
+
+            <p>But here's the thing. The AI is just the accelerant. What makes it work is knowing what good training looks like. I've redesigned onboarding that cut ramp time 30%. Built compliance programs that pass audits. Scaled LMS operations from zero to 500+ learners.</p>
+
+            <p><strong>AI makes me faster. Experience makes me effective.</strong></p>
+        </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section class="capabilities">
+        <div class="capabilities-inner">
+            <h2 class="section-title">What I Bring</h2>
+            <div class="caps-grid">
+                <div class="cap-card">
+                    <div class="cap-icon">🤖</div>
+                    <h3 class="cap-title">AI in Learning Systems</h3>
+                    <p class="cap-desc">I don't just use AI tools. I design interconnected workflows where LLMs, image generation, and automation work together as a system. Content pipelines, assessment generation, feedback analysis. If it can't be explained to stakeholders or supported by the team, it doesn't ship.</p>
+                </div>
+
+                <div class="cap-card">
+                    <div class="cap-icon">📊</div>
+                    <h3 class="cap-title">LMS Implementation & Optimization</h3>
+                    <p class="cap-desc">Direct experience with TalentLMS, 360Learning, and Paycom. From vendor evaluation to rollout to optimization. I've scaled learning operations to 500+ learners with trackable delivery and performance analytics.</p>
+                </div>
+
+                <div class="cap-card">
+                    <div class="cap-icon">🎯</div>
+                    <h3 class="cap-title">Instructional Design That Works</h3>
+                    <p class="cap-desc">ADDIE, SAM, Agile. I've used them all, but I care more about results than methodology. Interactive courses in Articulate 360. Blended programs for virtual and onsite. Content that actually changes behavior.</p>
+                </div>
+
+                <div class="cap-card">
+                    <div class="cap-icon">📈</div>
+                    <h3 class="cap-title">Training Strategy That Proves Value</h3>
+                    <p class="cap-desc">I design training programs that can prove their value. Baseline metrics before launch. KPIs tied to business goals. ROI calculations that executives understand. Not just completions. Impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools -->
+    <section class="tools">
+        <h2 class="section-title">Tools & Tech</h2>
+        <div class="tools-grid">
+            <div class="tool-group">
+                <div class="tool-group-title">AI & Automation</div>
+                <div class="tool-list">
+                    <span class="tool-item">Claude (Anthropic)</span>
+                    <span class="tool-item">GPT-4 (OpenAI)</span>
+                    <span class="tool-item">Stable Diffusion / ComfyUI</span>
+                    <span class="tool-item">Zapier</span>
+                    <span class="tool-item">Custom Python</span>
+                </div>
+            </div>
+
+            <div class="tool-group">
+                <div class="tool-group-title">Authoring & Design</div>
+                <div class="tool-list">
+                    <span class="tool-item">Articulate 360</span>
+                    <span class="tool-item">Adobe Captivate</span>
+                    <span class="tool-item">Premiere Pro</span>
+                    <span class="tool-item">Canva</span>
+                    <span class="tool-item">Figma</span>
+                </div>
+            </div>
+
+            <div class="tool-group">
+                <div class="tool-group-title">Platforms & Systems</div>
+                <div class="tool-list">
+                    <span class="tool-item">TalentLMS</span>
+                    <span class="tool-item">360Learning</span>
+                    <span class="tool-item">Paycom LMS</span>
+                    <span class="tool-item">Salesforce</span>
+                    <span class="tool-item">Microsoft 365</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Download -->
+    <section class="resume-section">
+        <h2>Want the details?</h2>
+        <p>Full work history, metrics, and credentials.</p>
+        <a href="JStringer-Resume.pdf" class="btn-primary" download>Download Resume</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="how-i-work.html">How I Work</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://www.linkedin.com/in/josh-stringer/" target="_blank">LinkedIn</a>
+        </div>
+        <p class="footer-copy">Joshua Stringer · Gilbert, AZ · josh.stringer62@gmail.com</p>
+        <p class="footer-copyright">© 2025 Joshua Stringer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Ownership fingerprint
+        console.log('%c🔒 This site is the intellectual property of Joshua Stringer', 'font-size: 14px; font-weight: bold; color: #4ecb8d;');
+        console.log('%cUnique ID: JSTR-2025-ABT-G7H8I9 | © 2025 All Rights Reserved', 'font-size: 11px; color: #888;');
+        console.log('%cUnauthorized copying or reproduction is prohibited.', 'font-size: 11px; color: #e85c5c;');
+        console.log('%cContact: josh.stringer62@gmail.com', 'font-size: 11px; color: #888;');
+    </script>
+</body>
+</html>

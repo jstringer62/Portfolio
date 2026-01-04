@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  JOSHUA STRINGER - PORTFOLIO WEBSITE
+  ============================================================================
+
+  Copyright (c) 2025 Joshua Stringer. All rights reserved.
+
+  This source code and design are the intellectual property of Joshua Stringer.
+  Unauthorized copying, modification, distribution, or use of this code,
+  design, or any derivative works is strictly prohibited without explicit
+  written permission from the author.
+
+  Contact: josh.stringer62@gmail.com
+  LinkedIn: linkedin.com/in/josh-stringer
+
+  ============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The ROI Question | Josh Stringer</title>
+    <meta name="description" content="Framework for proving training ROI with practical measurement methods and dashboards for mature L&D analytics.">
+    <meta name="author" content="Joshua Stringer">
+    <meta name="copyright" content="Copyright (c) 2025 Joshua Stringer. All rights reserved.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jstringer.com/portfolio-roi.html">
+    <meta property="og:title" content="The ROI Question | Joshua Stringer">
+    <meta property="og:description" content="Framework for proving training ROI with practical measurement methods and dashboards for mature L&D analytics.">
+    <meta property="og:image" content="https://jstringer.com/profile-headshot.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ3Y65TGTY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DQ3Y65TGTY');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page-specific variables */
+        :root {
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        body {
+            padding-top: 80px;
+        }
+
+        @media (max-width: 900px) {
+            .page { width: 100%; min-height: auto; padding: 24px; }
+        }
+
+        /* Page Structure */
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            padding: 0.6in 0.7in;
+            background: var(--bg-base);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-content {
+            flex: 1;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 1.5rem;
+        }
+
+        .page-header-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .page-header-number {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
+        }
+
+        .page-footer-name {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .page-footer-email {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Typography */
+        .label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 .accent {
+            color: var(--accent);
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ==================== PAGE 1: THE HOOK ==================== */
+        .hero-section {
+            margin-bottom: 4rem;
+        }
+
+        .problem-intro {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .problem-intro strong {
+            color: var(--text-primary);
+        }
+
+        .kirkpatrick-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .kirkpatrick-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .kirkpatrick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .kirkpatrick-column h4 {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .kirkpatrick-column.stuck h4 {
+            color: var(--negative);
+        }
+
+        .kirkpatrick-column.goal h4 {
+            color: var(--accent);
+        }
+
+        .kirkpatrick-level {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .kirkpatrick-level .level-num {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .kirkpatrick-column.stuck .level-num {
+            background: var(--negative-dim);
+            color: var(--negative);
+        }
+
+        .kirkpatrick-column.goal .level-num {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        .kirkpatrick-level .level-text {
+            color: var(--text-secondary);
+        }
+
+        .kirkpatrick-level .level-text strong {
+            color: var(--text-primary);
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+            border-left: 3px solid var(--human-color);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .insight-box p {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .insight-box p em {
+            color: var(--human-color);
+            font-style: normal;
+        }
+
+        .transition-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .scroll-arrow {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        /* ==================== PAGE 2: SCENARIOS ==================== */
+        .scenarios-intro {
+            margin-bottom: 2rem;
+        }
+
+        .scenarios-intro h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .scenarios-intro p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .moment-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .moment-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--ai-color);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .moment-question {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .response-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .response-box {
+            padding: 0;
+        }
+
+        .response-header {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .response-box.dont .response-header {
+            color: var(--negative);
+        }
+
+        .response-box.do .response-header {
+            color: var(--accent);
+        }
+
+        .response-quote {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .response-box.dont .response-quote {
+            text-decoration: line-through;
+            text-decoration-color: var(--negative);
+            opacity: 0.7;
+        }
+
+        .response-box.do .response-quote {
+            color: var(--text-primary);
+        }
+
+        .response-box.do .response-quote strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .response-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            padding-top: 1.5rem;
+        }
+
+        .response-why {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-style: normal;
+        }
+
+        .page-transition {
+            text-align: center;
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .page-transition p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .transition-arrow {
+            margin-top: 0.75rem;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        /* ==================== PAGE 3: THE FIX ==================== */
+        .fix-intro {
+            margin-bottom: 1.5rem;
+        }
+
+        .fix-intro p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .practices-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .practices-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .practices-section h3 svg {
+            color: var(--accent);
+        }
+
+        .practices-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .practice-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .practice-number {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.35rem;
+        }
+
+        .practice-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .practice-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .practice-tip {
+            font-size: 0.7rem;
+            color: var(--ai-color);
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-subtle);
+            font-style: italic;
+        }
+
+        .methods-section {
+            margin-bottom: 1.25rem;
+        }
+
+        .methods-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .methods-section h3 svg {
+            color: var(--ai-color);
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .method-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .method-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .method-title .method-icon {
+            font-size: 1rem;
+        }
+
+        .method-desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            flex: 1;
+        }
+
+        .method-example {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            background: var(--bg-elevated);
+            padding: 0.4rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .fix-transition {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+            border-left: 3px solid var(--human-color);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .fix-transition p {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* ==================== PAGE 4: DASHBOARD ==================== */
+        .dashboard-intro {
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-intro p {
+            font-size: 0.95rem;
+        }
+
+        .dashboard-container {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dashboard-title svg {
+            color: var(--accent);
+        }
+
+        .dashboard-filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-pill {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            padding: 0.25rem 0.6rem;
+            background: var(--bg-elevated);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        .filter-pill.active {
+            background: var(--ai-dim);
+            color: var(--ai-color);
+        }
+
+        .dashboard-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .dashboard-section {
+            background: var(--bg-elevated);
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .section-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .section-icon.executive {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        .section-icon.learning {
+            background: var(--ai-dim);
+            color: var(--ai-color);
+        }
+
+        .section-icon.ops {
+            background: var(--human-dim);
+            color: var(--human-color);
+        }
+
+        .section-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            padding: 0.6rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.15rem;
+        }
+
+        .metric-value.positive {
+            color: var(--accent);
+        }
+
+        .metric-value.neutral {
+            color: var(--ai-color);
+        }
+
+        .metric-value.warning {
+            color: var(--human-color);
+        }
+
+        .metric-label {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        .metric-change {
+            font-family: var(--font-mono);
+            font-size: 0.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .metric-change.up {
+            color: var(--accent);
+        }
+
+        .metric-change.down {
+            color: var(--negative);
+        }
+
+        /* ROI Calculator */
+        .roi-calculator {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1f1f28 100%);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 0.85rem;
+            margin-top: 0.75rem;
+        }
+
+        .roi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .roi-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .roi-program {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            background: var(--bg-elevated);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .roi-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .roi-inputs, .roi-calculation {
+            font-size: 0.7rem;
+        }
+
+        .roi-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.25rem 0;
+            border-bottom: 1px dashed var(--border-subtle);
+        }
+
+        .roi-row:last-child {
+            border-bottom: none;
+        }
+
+        .roi-label {
+            color: var(--text-muted);
+        }
+
+        .roi-value {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+        }
+
+        .roi-result {
+            background: var(--accent-dim);
+            padding: 0.5rem;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .roi-result-label {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            margin-bottom: 0.15rem;
+        }
+
+        .roi-result-value {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* ==================== PAGE 4: CTA ==================== */
+        .cta-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: calc(11in - 1.2in);
+        }
+
+        .cta-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .cta-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-title .accent {
+            color: var(--accent);
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .value-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .value-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+
+        .value-card-icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .value-card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .value-card-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.75rem 2.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .contact-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .contact-link {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-location {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .cta-closing {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ==================== PRINT STYLES ==================== */
+        @media print {
+            @page {
+                size: letter;
+                margin: 0;
+            }
+
+            html {
+                font-size: 15px;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .page {
+                width: 8.5in;
+                height: 11in;
+                min-height: 11in;
+                max-height: 11in;
+                padding: 0.5in 0.6in;
+                page-break-after: always;
+                page-break-inside: avoid;
+                overflow: hidden;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+            .page-content {
+                flex: 1;
+                overflow: hidden;
+            }
+
+            h1 {
+                font-size: 2.75rem;
+            }
+
+            .subtitle {
+                font-size: 1.15rem;
+            }
+
+            .hero-section {
+                margin-bottom: 4rem;
+            }
+
+            .moment-card {
+                padding: 1.25rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .page-transition {
+                margin-top: auto;
+                padding-top: 1rem;
+            }
+
+            .cta-page {
+                padding-top: 0.5in;
+            }
+
+            .cta-title {
+                font-size: 2.5rem;
+            }
+
+            .value-cards {
+                margin-bottom: 2rem;
+            }
+
+            .contact-card {
+                padding: 1.5rem 2rem;
+            }
+        }
+
+        /* Screen-only spacing */
+        @media screen {
+            .page {
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ownership Watermark - JSTR-2025-ROI-S4T5U6 -->
+    <div data-owner="joshua-stringer" data-site-id="jstr-2025-roi" data-created="2025" aria-hidden="true" style="display:none!important"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">Josh Stringer</a>
+        <a href="portfolio.html" class="nav-back">← Back to Portfolio</a>
+        <a href="contact.html" class="nav-cta">Get in touch</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="portfolio.html">Portfolio</a>
+        <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="mobile-dropdown-label">Case Study</span></a>
+        <a href="portfolio-roi.html">The ROI Question<span class="mobile-dropdown-label">Framework</span></a>
+        <a href="portfolio-maturity.html">L&D Maturity Model<span class="mobile-dropdown-label">Diagnostic</span></a>
+        <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="mobile-dropdown-label">Journey Map</span></a>
+        <a href="about.html">About</a>
+        <a href="how-i-work.html">How I Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- ==================== PAGE 1: THE HOOK ==================== -->
+    <div class="page" id="page-1">
+        <div class="page-content">
+            <div class="hero-section">
+                <div class="label">L&D Measurement Framework</div>
+                <h1>The ROI <span class="accent">Question</span></h1>
+                <p class="subtitle">Every L&D team gets asked. Few can answer.</p>
+            </div>
+
+            <div class="problem-intro">
+                <p>You've been in this meeting. Someone from leadership, maybe the CEO, maybe a VP, looks across the table and asks: <strong>"What's the ROI on our training budget?"</strong></p>
+                <p>The room gets quiet.</p>
+                <p>You have completion rates. You have satisfaction scores. You have hours of training delivered. But you know that's not what they're asking. <strong>They want to know if the money they're spending is coming back.</strong></p>
+            </div>
+
+            <div class="kirkpatrick-section">
+                <h3>The Measurement Gap</h3>
+                <div class="kirkpatrick-grid">
+                    <div class="kirkpatrick-column stuck">
+                        <h4>Where Most Teams Are Stuck</h4>
+                        <div class="kirkpatrick-level">
+                            <span class="level-num">1</span>
+                            <span class="level-text"><strong>Reaction:</strong> Did they like it?</span>
+                        </div>
+                        <div class="kirkpatrick-level">
+                            <span class="level-num">2</span>
+                            <span class="level-text"><strong>Learning:</strong> Did they pass the quiz?</span>
+                        </div>
+                    </div>
+                    <div class="kirkpatrick-column goal">
+                        <h4>What Executives Are Asking</h4>
+                        <div class="kirkpatrick-level">
+                            <span class="level-num">4</span>
+                            <span class="level-text"><strong>Results:</strong> Did metrics move?</span>
+                        </div>
+                        <div class="kirkpatrick-level">
+                            <span class="level-num">5</span>
+                            <span class="level-text"><strong>ROI:</strong> Was it worth the investment?</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <p><em>This isn't a dashboard problem. It's a design problem.</em> You can't measure what you didn't build to be measured.</p>
+            </div>
+
+            <p class="transition-text">Here are two moments where the ROI question shows up, and how to answer it.</p>
+            <div class="scroll-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span class="page-footer-name">Joshua Stringer</span>
+            <span class="page-footer-email">josh.stringer62@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 2: THE SCENARIOS ==================== -->
+    <div class="page" id="page-2">
+        <header class="page-header">
+            <span class="page-header-title">Joshua Stringer · The ROI Question</span>
+            <span class="page-header-number">02</span>
+        </header>
+
+        <div class="page-content">
+            <div class="scenarios-intro">
+                <h2>Speak Their Language</h2>
+                <p>The same results, framed two different ways. One gets ignored. One gets funded.</p>
+            </div>
+
+            <!-- Moment 1 -->
+            <div class="moment-card">
+                <div class="moment-label">THE BUDGET MEETING</div>
+                <div class="moment-question">"Justify next year's L&D budget."</div>
+
+                <div class="response-grid">
+                    <div class="response-box dont">
+                        <div class="response-header">✗ Don't Say</div>
+                        <p class="response-quote">"We trained 2,000 employees and launched 15 new courses."</p>
+                        <p class="response-why">Activity metrics. They hear: "We were busy."</p>
+                    </div>
+                    <div class="response-arrow">→</div>
+                    <div class="response-box do">
+                        <div class="response-header">✓ Say This</div>
+                        <p class="response-quote">"Three programs. <strong>340% ROI</strong>. Compliance: audit ready. Sales: $130K saved. Leadership: turnover down 18%."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment 2 -->
+            <div class="moment-card">
+                <div class="moment-label">THE EXECUTIVE REVIEW</div>
+                <div class="moment-question">"What's the ROI on our training investment?"</div>
+
+                <div class="response-grid">
+                    <div class="response-box dont">
+                        <div class="response-header">✗ Don't Say</div>
+                        <p class="response-quote">"95% completion rate. 4.2 out of 5 satisfaction."</p>
+                        <p class="response-why">Vanity metrics. They hear: "No idea."</p>
+                    </div>
+                    <div class="response-arrow">→</div>
+                    <div class="response-box do">
+                        <div class="response-header">✓ Say This</div>
+                        <p class="response-quote">"Sales onboarding: <strong>767% ROI</strong>. Reps close 13 days faster. $130K value, $15K cost."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-transition">
+                <p>So how do you become the person who can give the right answer?</p>
+                <div class="transition-arrow">↓</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span class="page-footer-name">Joshua Stringer</span>
+            <span class="page-footer-email">josh.stringer62@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 3: THE FIX ==================== -->
+    <div class="page" id="page-3">
+        <header class="page-header">
+            <span class="page-header-title">Joshua Stringer · The ROI Question</span>
+            <span class="page-header-number">03</span>
+        </header>
+
+        <div class="page-content">
+            <div class="fix-intro">
+                <h2>The Fix: Design for Measurability</h2>
+                <p>You can't measure what you didn't build to be measured. The teams that answer the ROI question aren't using better dashboards. They're designing training differently from day one.</p>
+            </div>
+
+            <div class="practices-section">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    Four Practices That Make ROI Possible
+                </h3>
+                <div class="practices-grid">
+                    <div class="practice-card">
+                        <div class="practice-number">PRACTICE 01</div>
+                        <div class="practice-title">Start with the business problem</div>
+                        <div class="practice-desc">Not the training request. When someone asks for "sales training," ask what metric they're trying to move. No metric = no ROI.</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="practice-number">PRACTICE 02</div>
+                        <div class="practice-title">Define success before you build</div>
+                        <div class="practice-desc">What specific number will tell you this worked? Time to first deal? Error rate? If you can't name it, redesign until you can.</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="practice-number">PRACTICE 03</div>
+                        <div class="practice-title">Establish baseline before launch</div>
+                        <div class="practice-desc">No baseline = no comparison = no ROI. Measure the target metric before training starts, even if imperfectly.</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="practice-number">PRACTICE 04</div>
+                        <div class="practice-title">Build in measurement checkpoints</div>
+                        <div class="practice-desc">30/60/90 day follow ups aren't optional. Schedule them before the program launches. Put them on the calendar.</div>
+                        <div class="practice-tip">Even better: automate them. LMS triggers and scheduled reports ensure it happens.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="methods-section">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                    How to Connect Training Data to Business Outcomes
+                </h3>
+                <div class="methods-grid">
+                    <div class="method-card">
+                        <div class="method-title">
+                            <span class="method-icon">📊</span>
+                            Manual Data Join
+                        </div>
+                        <div class="method-desc">Export LMS completion data. Export HRIS performance data. Join them in Excel with VLOOKUP on employee ID.</div>
+                        <div class="method-example">LMS Export + HRIS Export + VLOOKUP = Correlation</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-title">
+                            <span class="method-icon">📈</span>
+                            Pre/Post Comparison
+                        </div>
+                        <div class="method-desc">Measure the target metric before training. Measure again 30/60/90 days after. Calculate the delta.</div>
+                        <div class="method-example">Baseline ▸ Training ▸ Measure ▸ Compare</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-title">
+                            <span class="method-icon">👥</span>
+                            Cohort Comparison
+                        </div>
+                        <div class="method-desc">Compare trained employees vs. untrained on the same metric. Control for tenure and role where possible.</div>
+                        <div class="method-example">Trained Group vs. Control Group = Difference</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fix-transition">
+                <p>When you design for measurability and connect your data, you can build a system that answers the ROI question on demand. Here's what that looks like.</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span class="page-footer-name">Joshua Stringer</span>
+            <span class="page-footer-email">josh.stringer62@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 4: THE DASHBOARD ==================== -->
+    <div class="page" id="page-4">
+        <header class="page-header">
+            <span class="page-header-title">Joshua Stringer · The ROI Question</span>
+            <span class="page-header-number">04</span>
+        </header>
+
+        <div class="page-content">
+            <div class="dashboard-intro">
+                <h2>What Measurement Maturity Looks Like</h2>
+                <p>The difference isn't better tools. It's organizing metrics by what they actually tell you, and who needs to see them.</p>
+            </div>
+
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <div class="dashboard-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                        L&D Analytics Dashboard
+                    </div>
+                    <div class="dashboard-filters">
+                        <span class="filter-pill active">All Programs</span>
+                        <span class="filter-pill">Q4 2024</span>
+                        <span class="filter-pill">Sales</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-sections">
+                    <!-- Executive Section -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <div class="section-icon executive">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                            <span class="section-title">Business Impact</span>
+                            <span class="section-subtitle">What Executives Want</span>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value positive">32 days</div>
+                                <div class="metric-label">Time to Productivity</div>
+                                <div class="metric-change up">↓ 13 days from baseline</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value positive">+23%</div>
+                                <div class="metric-label">Quota Attainment</div>
+                                <div class="metric-change up">trained vs untrained</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value positive">↓34%</div>
+                                <div class="metric-label">Support Escalations</div>
+                                <div class="metric-change up">↓ from Q3</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value positive">340%</div>
+                                <div class="metric-label">Training ROI</div>
+                                <div class="metric-change up">rolling 12 month</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Section -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <div class="section-icon learning">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            </div>
+                            <span class="section-title">Learning Effectiveness</span>
+                            <span class="section-subtitle">What L&D Needs</span>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value neutral">87%</div>
+                                <div class="metric-label">Assessment Pass Rate</div>
+                                <div class="metric-change">first attempt</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value neutral">78%</div>
+                                <div class="metric-label">Knowledge Retention</div>
+                                <div class="metric-change">at 30 day check</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value neutral">67%</div>
+                                <div class="metric-label">On Track Learners</div>
+                                <div class="metric-change">competency progress</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value warning">3</div>
+                                <div class="metric-label">Skill Gaps Identified</div>
+                                <div class="metric-change">action required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operational Section -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <div class="section-icon ops">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                            </div>
+                            <span class="section-title">Operational Health</span>
+                            <span class="section-subtitle">What Keeps Things Running</span>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">94%</div>
+                                <div class="metric-label">Completion Rate</div>
+                                <div class="metric-change">compliance: 100%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4.3</div>
+                                <div class="metric-label">Learner NPS</div>
+                                <div class="metric-change">out of 5</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value warning">12%</div>
+                                <div class="metric-label">Content Needs Review</div>
+                                <div class="metric-change">&gt;6 months old</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value warning">3</div>
+                                <div class="metric-label">Certifications Due</div>
+                                <div class="metric-change">next 30 days</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROI Calculator -->
+                <div class="roi-calculator">
+                    <div class="roi-header">
+                        <div class="roi-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
+                            Sample ROI Calculation
+                        </div>
+                        <span class="roi-program">Sales Onboarding Q4</span>
+                    </div>
+                    <div class="roi-body">
+                        <div class="roi-inputs">
+                            <div class="roi-row">
+                                <span class="roi-label">Business Metric</span>
+                                <span class="roi-value">Time to first deal</span>
+                            </div>
+                            <div class="roi-row">
+                                <span class="roi-label">Baseline</span>
+                                <span class="roi-value">45 days</span>
+                            </div>
+                            <div class="roi-row">
+                                <span class="roi-label">Post Training</span>
+                                <span class="roi-value">32 days</span>
+                            </div>
+                            <div class="roi-row">
+                                <span class="roi-label">Improvement</span>
+                                <span class="roi-value" style="color: var(--accent);">13 days faster</span>
+                            </div>
+                        </div>
+                        <div class="roi-calculation">
+                            <div class="roi-row">
+                                <span class="roi-label">New reps/year × days saved</span>
+                                <span class="roi-value">20 × 13 = 260</span>
+                            </div>
+                            <div class="roi-row">
+                                <span class="roi-label">Value per selling day</span>
+                                <span class="roi-value">$500</span>
+                            </div>
+                            <div class="roi-row">
+                                <span class="roi-label">Total Value Created</span>
+                                <span class="roi-value" style="color: var(--accent);">$130,000</span>
+                            </div>
+                            <div class="roi-row">
+                                <span class="roi-label">Program Cost</span>
+                                <span class="roi-value">$15,000</span>
+                            </div>
+                            <div class="roi-result">
+                                <div class="roi-result-label">CALCULATED ROI</div>
+                                <div class="roi-result-value">767%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span class="page-footer-name">Joshua Stringer</span>
+            <span class="page-footer-email">josh.stringer62@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 5: CTA ==================== -->
+    <div class="page" id="page-5">
+        <div class="cta-page">
+            <div class="cta-label">What's Next</div>
+            <h1 class="cta-title">Let's Build<br><span class="accent">Measurement That Matters</span></h1>
+            <p class="cta-subtitle">I design L&D measurement systems that answer the questions executives actually ask. Not vanity metrics, but business impact tied to real dollars.</p>
+
+            <div class="value-cards">
+                <div class="value-card">
+                    <div class="value-card-icon">📊</div>
+                    <div class="value-card-title">Build Systems</div>
+                    <div class="value-card-text">Analytics frameworks, ROI tracking, measurement infrastructure</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-card-icon">🎯</div>
+                    <div class="value-card-title">Prove Impact</div>
+                    <div class="value-card-text">Turn training metrics into business language leadership understands</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-card-icon">💬</div>
+                    <div class="value-card-title">Have Conversations</div>
+                    <div class="value-card-text">The best solutions start with understanding your specific challenges</div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-name">Joshua Stringer</div>
+                <div class="contact-title">L&D Manager · Learning Architect · AI Systems Builder</div>
+                <div class="contact-links">
+                    <a href="mailto:josh.stringer62@gmail.com" class="contact-link">josh.stringer62@gmail.com</a>
+                    <a href="https://linkedin.com/in/josh-stringer" class="contact-link">linkedin.com/in/josh-stringer</a>
+                </div>
+                <div class="contact-location">Gilbert, AZ · Open to Remote</div>
+            </div>
+
+            <p class="cta-closing">Even if you're not hiring right now, I'd love to connect. The best opportunities often start with a conversation.</p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="site-footer-links">
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="how-i-work.html">How I Work</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://www.linkedin.com/in/josh-stringer/" target="_blank">LinkedIn</a>
+        </div>
+        <p class="site-footer-copy">Joshua Stringer · Gilbert, AZ · josh.stringer62@gmail.com</p>
+        <p class="site-footer-copyright">© 2025 Joshua Stringer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Ownership fingerprint
+        console.log('%c🔒 This site is the intellectual property of Joshua Stringer', 'font-size: 14px; font-weight: bold; color: #4ecb8d;');
+        console.log('%cUnique ID: JSTR-2025-ROI-S4T5U6 | © 2025 All Rights Reserved', 'font-size: 11px; color: #888;');
+        console.log('%cUnauthorized copying or reproduction is prohibited.', 'font-size: 11px; color: #e85c5c;');
+        console.log('%cContact: josh.stringer62@gmail.com', 'font-size: 11px; color: #888;');
+    </script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+/*
+ * ============================================================================
+ * JOSHUA STRINGER - PORTFOLIO WEBSITE
+ * ============================================================================
+ *
+ * Copyright (c) 2025 Joshua Stringer. All rights reserved.
+ *
+ * This source code and design are the intellectual property of Joshua Stringer.
+ * Unauthorized copying, modification, distribution, or use of this code,
+ * design, or any derivative works is strictly prohibited without explicit
+ * written permission from the author.
+ *
+ * Contact: josh.stringer62@gmail.com
+ * Website: linkedin.com/in/josh-stringer
+ *
+ * ============================================================================
+ */
+
+/* ===================
+   CSS Variables
+   =================== */
+:root {
+    /* Base palette */
+    --bg-base: #0c0c10;
+    --bg-elevated: #141419;
+    --bg-card: #1a1a21;
+    --bg-subtle: #22222b;
+
+    /* Borders */
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-default: rgba(255, 255, 255, 0.1);
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --border-strong: rgba(255, 255, 255, 0.15);
+
+    /* Text */
+    --text-primary: #f4f4f6;
+    --text-secondary: #a0a0b0;
+    --text-tertiary: #6b6b7a;
+    --text-muted: #4a4a58;
+
+    /* Semantic colors */
+    --accent: #4ecb8d;
+    --accent-dim: rgba(78, 203, 141, 0.15);
+    --ai-color: #6b9fff;
+    --ai-dim: rgba(107, 159, 255, 0.15);
+    --human-color: #e8a84c;
+    --human-dim: rgba(232, 168, 76, 0.15);
+    --negative: #e85c5c;
+    --negative-dim: rgba(232, 92, 92, 0.15);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================
+   Reset & Base
+   =================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+}
+
+/* ===================
+   Navigation
+   =================== */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(12, 12, 16, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-logo {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text-primary);
+}
+
+/* Nav Dropdown */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-dropdown > a::after {
+    content: '\25BE';
+    font-size: 10px;
+    opacity: 0.6;
+    margin-top: 1px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    margin-top: 12px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    padding: 8px;
+    min-width: 240px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.dropdown-menu a:hover {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+.dropdown-menu .dropdown-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 4px;
+}
+
+/* Nav CTA Button */
+.nav-cta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.nav-cta:hover {
+    background: rgba(78, 203, 141, 0.25);
+}
+
+/* Nav Back Link (for case study pages) */
+.nav-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-back:hover {
+    color: var(--accent);
+}
+
+/* ===================
+   Mobile Menu Toggle
+   =================== */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===================
+   Mobile Menu
+   =================== */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-default);
+    padding: 16px 24px 24px;
+    z-index: 99;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 14px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: color 0.2s ease;
+}
+
+.mobile-menu a:last-child {
+    border-bottom: none;
+}
+
+.mobile-menu a:hover {
+    color: var(--text-primary);
+}
+
+.mobile-menu .mobile-dropdown-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+}
+
+/* ===================
+   Footer
+   =================== */
+.footer {
+    padding: 40px;
+    border-top: 1px solid var(--border-subtle);
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.footer-links a {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--text-primary);
+}
+
+.footer-copy {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.footer-copyright {
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* ===================
+   Common Buttons
+   =================== */
+.btn-primary {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--bg-base);
+    background: var(--accent);
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: #5dd89a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(78, 203, 141, 0.3);
+}
+
+.btn-secondary {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-subtle);
+}
+
+/* ===================
+   Footer CTA Section
+   =================== */
+.footer-cta {
+    padding: 140px 40px;
+    text-align: center;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.footer-cta-inner {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.footer-cta h2 {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.footer-cta p {
+    font-size: 20px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+}
+
+/* ===================
+   Site Footer (for case study pages)
+   =================== */
+.site-footer {
+    padding: 40px;
+    border-top: 1px solid var(--border-subtle);
+    text-align: center;
+    background: var(--bg-base);
+    max-width: 1200px;
+    margin: 60px auto 0;
+}
+
+.site-footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.site-footer-links a {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-footer-links a:hover {
+    color: var(--text-primary);
+}
+
+.site-footer-copy {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.site-footer-copyright {
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* ===================
+   Mobile Responsive - Navigation
+   =================== */
+@media (max-width: 900px) {
+    .nav {
+        padding: 16px 24px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .nav-cta {
+        display: none;
+    }
+
+    .nav-back {
+        display: none;
+    }
+
+    .footer-cta {
+        padding: 100px 24px;
+    }
+
+    .footer-cta h2 {
+        font-size: 36px;
+        letter-spacing: -1px;
+    }
+
+    .footer-cta p {
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+}
+
+/* ===================
+   Print Watermark
+   =================== */
+@media print {
+    body::before {
+        content: "© 2025 Joshua Stringer • josh.stringer62@gmail.com • All Rights Reserved";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        font-size: 48px;
+        font-weight: 700;
+        color: rgba(78, 203, 141, 0.08);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 9999;
+    }
+
+    body::after {
+        content: "CONFIDENTIAL - Property of Joshua Stringer";
+        position: fixed;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+    }
+}

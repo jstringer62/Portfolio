@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  JOSHUA STRINGER - PORTFOLIO WEBSITE
+  ============================================================================
+
+  Copyright (c) 2025 Joshua Stringer. All rights reserved.
+
+  This source code and design are the intellectual property of Joshua Stringer.
+  Unauthorized copying, modification, distribution, or use of this code,
+  design, or any derivative works is strictly prohibited without explicit
+  written permission from the author.
+
+  Contact: josh.stringer62@gmail.com
+  LinkedIn: linkedin.com/in/josh-stringer
+
+  ============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Pipeline Case Study | Joshua Stringer</title>
+    <meta name="description" content="Case study: How I built an AI content pipeline that cut L&D production time by 75% - from 40 hours to under 10.">
+    <meta name="author" content="Joshua Stringer">
+    <meta name="copyright" content="Copyright (c) 2025 Joshua Stringer. All rights reserved.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jstringer.com/portfolio-ai-pipeline.html">
+    <meta property="og:title" content="AI Content Pipeline Case Study | Joshua Stringer">
+    <meta property="og:description" content="How I built an AI content pipeline that cut L&D production time by 75% - from 40 hours to under 10.">
+    <meta property="og:image" content="https://jstringer.com/profile-headshot.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ3Y65TGTY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DQ3Y65TGTY');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional variables for this page */
+        :root {
+            --verify-color: #a78bfa;
+            --verify-dim: rgba(167, 139, 250, 0.15);
+        }
+
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        body {
+            padding: 100px 0 40px 0;
+        }
+
+        @media (max-width: 900px) {
+            body { padding-top: 80px; }
+            .page { width: 100%; padding: 24px; margin-bottom: 24px; border-radius: 0; }
+        }
+
+        /* Page structure */
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            padding: 0.65in 0.75in;
+            margin: 0 auto 40px auto;
+            background: var(--bg-base);
+            position: relative;
+            page-break-after: always;
+            overflow: hidden;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+            margin-bottom: 0;
+        }
+
+        /* Page header bar */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 32px;
+        }
+
+        .page-header-brand {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+
+        .page-header-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+
+        h1 .highlight {
+            color: var(--accent);
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        .lead {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        ul li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding-left: 18px;
+            position: relative;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 7px;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            background: var(--accent-dim);
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 0 10px 10px 0;
+            margin: 24px 0;
+        }
+
+        .pull-quote p {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* Metrics */
+        .metrics-bar {
+            display: flex;
+            gap: 28px;
+            padding: 24px 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 14px;
+        }
+
+        .metric {
+            text-align: center;
+            flex: 1;
+        }
+
+        .metric-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border-subtle);
+            margin: 32px 0;
+        }
+
+        /* ========== PAGE 1: COVER ========== */
+        .cover {
+            height: calc(11in - 1.3in);
+            display: grid;
+            grid-template-rows: auto 1fr auto auto;
+            gap: 0;
+        }
+
+        .cover-hero {
+            padding-top: 16px;
+            padding-bottom: 48px;
+        }
+
+        .cover-hero .eyebrow {
+            margin-bottom: 16px;
+        }
+
+        .cover-hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            line-height: 1.05;
+        }
+
+        .cover-hero .subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 480px;
+            line-height: 1.6;
+        }
+
+        .cover-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding-bottom: 32px;
+        }
+
+        .cover-metric {
+            text-align: center;
+            padding: 28px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .cover-metric-icon {
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        .cover-metric-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-top: 4px;
+        }
+
+        .cover-metric-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .cover-summary {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 14px;
+            padding: 28px 32px;
+        }
+
+        .cover-summary-label {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .cover-summary-content {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.85;
+        }
+
+        .cover-summary-content strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cover-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            margin-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .cover-author-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .cover-author-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .cover-author-title {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .cover-tools {
+            display: flex;
+            gap: 8px;
+        }
+
+        .cover-tool {
+            padding: 6px 12px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text-tertiary);
+        }
+
+        /* ========== PAGE 2: CHALLENGE + ROLE ========== */
+        .challenge-card {
+            background: var(--negative-dim);
+            border: 1px solid rgba(232, 92, 92, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .challenge-card h3 {
+            color: var(--negative);
+            margin-bottom: 16px;
+        }
+
+        .challenge-card ul li::before {
+            background: var(--negative);
+        }
+
+        .role-card {
+            background: var(--ai-dim);
+            border: 1px solid rgba(107, 159, 255, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .role-card h3 {
+            color: var(--ai-color);
+            margin-bottom: 16px;
+        }
+
+        .role-card ul li::before {
+            background: var(--ai-color);
+        }
+
+        /* ========== PAGE 3: PIPELINE ========== */
+        .pipeline-container {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .pipeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .pipeline-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .pipeline-legend {
+            display: flex;
+            gap: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.ai { background: var(--ai-color); }
+        .legend-dot.human { background: var(--human-color); }
+        .legend-dot.verify { background: var(--verify-color); }
+
+        .pipeline-stages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .stage {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 10px;
+            padding: 18px;
+            position: relative;
+        }
+
+        .stage.ai { border-color: rgba(107, 159, 255, 0.3); }
+        .stage.human { border-color: rgba(232, 168, 76, 0.3); }
+        .stage.verify { border-color: rgba(167, 139, 250, 0.3); }
+
+        .stage-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            margin-bottom: 6px;
+        }
+
+        .stage-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .stage-desc {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            line-height: 1.5;
+        }
+
+        .stage-type {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 12px;
+        }
+
+        .insight-box {
+            background: var(--accent-dim);
+            border: 1px solid rgba(78, 203, 141, 0.25);
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            gap: 14px;
+        }
+
+        .insight-icon {
+            font-size: 18px;
+            line-height: 1.3;
+        }
+
+        .insight-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .insight-text strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ========== PAGE 4: IMPLEMENTATION ========== */
+        .code-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        .code-block .comment {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .code-block .label {
+            color: var(--ai-color);
+            font-weight: 600;
+        }
+
+        .code-block .value {
+            color: var(--accent);
+        }
+
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .before-box, .after-box {
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .before-box {
+            background: var(--negative-dim);
+            border: 1px solid rgba(232, 92, 92, 0.2);
+        }
+
+        .after-box {
+            background: var(--accent-dim);
+            border: 1px solid rgba(78, 203, 141, 0.2);
+        }
+
+        .box-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .before-box .box-label { color: var(--negative); }
+        .after-box .box-label { color: var(--accent); }
+
+        .box-content {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ========== PAGE 5: RESULTS ========== */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .result-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .result-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .result-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            line-height: 1.4;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .lesson {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .lesson-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .lesson-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .lesson-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, var(--accent-dim) 0%, var(--ai-dim) 100%);
+            border: 1px solid rgba(78, 203, 141, 0.25);
+            border-radius: 14px;
+            padding: 28px;
+            margin-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-text h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .contact-text p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .contact-details {
+            text-align: right;
+        }
+
+        .contact-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .contact-email {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            margin-bottom: 2px;
+        }
+
+        .contact-location {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+
+        /* Page content wrapper for footer positioning */
+        .page-content {
+            display: flex;
+            flex-direction: column;
+            min-height: calc(11in - 1.3in);
+        }
+
+        .page-main {
+            flex: 1;
+        }
+
+        /* Expandable details */
+        details summary {
+            user-select: none;
+        }
+
+        details[open] summary {
+            border-radius: 8px 8px 0 0;
+        }
+
+        details[open] summary span:first-child {
+            transform: rotate(90deg);
+            display: inline-block;
+        }
+
+        /* Hide print-only elements in browser */
+        .print-only {
+            display: none;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: var(--bg-base);
+                padding: 0;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                height: 11in;
+                min-height: 11in;
+                max-height: 11in;
+                overflow: hidden;
+                padding: 0.5in 0.6in;
+            }
+
+            /* Force page breaks */
+            .page {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+            /* Prevent breaking inside key elements */
+            .card, .result-card, .lesson, .stage, .insight-box,
+            .pull-quote, .challenge-card, .role-card, .cover-metric,
+            .pipeline-container, .before-after, .results-grid, .lessons-grid {
+                page-break-inside: avoid;
+            }
+
+            /* Footer positioning for print - use flexbox, not absolute */
+            .page-content {
+                display: flex;
+                flex-direction: column;
+                height: calc(11in - 1in);
+                min-height: calc(11in - 1in);
+            }
+
+            .page-main {
+                flex: 1 1 auto;
+            }
+
+            .page-footer {
+                flex-shrink: 0;
+                margin-top: auto;
+                padding-top: 16px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top: 1px solid var(--border-subtle);
+            }
+
+            /* Hide expandable details in print - too long */
+            details {
+                display: none !important;
+            }
+
+            /* Show print-only note about full prompt */
+            .print-only {
+                display: block !important;
+            }
+
+            /* Reduce some spacing for print */
+            .cover {
+                height: calc(11in - 1in);
+            }
+
+            .cover-hero h1 {
+                font-size: 48px;
+            }
+
+            .cover-metric {
+                padding: 20px 12px;
+            }
+
+            .cover-metric-value {
+                font-size: 26px;
+            }
+
+            .cover-summary {
+                padding: 20px 24px;
+            }
+
+            .pipeline-container {
+                padding: 20px;
+            }
+
+            .stage {
+                padding: 14px;
+            }
+
+            h2 {
+                margin-bottom: 16px;
+            }
+
+            .lead {
+                font-size: 14px;
+                margin-bottom: 24px !important;
+            }
+
+            .results-grid {
+                margin-bottom: 20px;
+            }
+
+            .result-value {
+                font-size: 32px;
+            }
+
+            .lessons-grid {
+                margin-top: 16px;
+            }
+
+            .lesson {
+                padding: 14px;
+            }
+
+            .divider {
+                margin: 20px 0;
+            }
+
+            /* Page 4 specific fixes */
+            .before-after {
+                gap: 16px;
+                margin: 16px 0;
+            }
+
+            .before-box, .after-box {
+                padding: 16px;
+            }
+
+            .box-content {
+                font-size: 11px !important;
+                line-height: 1.5 !important;
+            }
+
+            .before-box .box-content, .after-box .box-content {
+                font-size: 11px !important;
+            }
+
+            /* Constrain the two-column cards on page 4 */
+            .page:nth-of-type(4) .card {
+                padding: 16px;
+            }
+
+            .page:nth-of-type(4) .card ul li {
+                font-size: 12px;
+                margin-bottom: 4px;
+            }
+
+            .page:nth-of-type(4) h3 {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ownership Watermark - JSTR-2025-AIP-P1Q2R3 -->
+    <div data-owner="joshua-stringer" data-site-id="jstr-2025-aip" data-created="2025" aria-hidden="true" style="display:none!important"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">Josh Stringer</a>
+        <a href="portfolio.html" class="nav-back">← Back to Portfolio</a>
+        <a href="contact.html" class="nav-cta">Get in touch</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="portfolio.html">Portfolio</a>
+        <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="mobile-dropdown-label">Case Study</span></a>
+        <a href="portfolio-roi.html">The ROI Question<span class="mobile-dropdown-label">Framework</span></a>
+        <a href="portfolio-maturity.html">L&D Maturity Model<span class="mobile-dropdown-label">Diagnostic</span></a>
+        <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="mobile-dropdown-label">Journey Map</span></a>
+        <a href="about.html">About</a>
+        <a href="how-i-work.html">How I Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+<!-- ==================== PAGE 1: COVER ==================== -->
+<div class="page">
+    <div class="cover">
+        <div class="cover-hero">
+            <span class="eyebrow">Case Study</span>
+            <h1>From 40 Hours<br>to <span class="highlight">Under 10</span></h1>
+            <p class="subtitle">How I built an AI powered content pipeline that transformed L&D production at enterprise scale</p>
+        </div>
+
+        <div class="cover-metrics">
+            <div class="cover-metric">
+                <div class="cover-metric-icon" aria-hidden="true">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                </div>
+                <div class="cover-metric-value">75%</div>
+                <div class="cover-metric-label">Time Reduction</div>
+            </div>
+            <div class="cover-metric">
+                <div class="cover-metric-icon" aria-hidden="true">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="20" x2="12" y2="10"></line>
+                        <line x1="18" y1="20" x2="18" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </div>
+                <div class="cover-metric-value">4x</div>
+                <div class="cover-metric-label">Output Capacity</div>
+            </div>
+            <div class="cover-metric">
+                <div class="cover-metric-icon" aria-hidden="true">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                </div>
+                <div class="cover-metric-value">&lt;10h</div>
+                <div class="cover-metric-label">Per Module</div>
+            </div>
+            <div class="cover-metric">
+                <div class="cover-metric-icon" aria-hidden="true">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <div class="cover-metric-value">1,000+</div>
+                <div class="cover-metric-label">Employees Served</div>
+            </div>
+        </div>
+
+        <div class="cover-summary">
+            <span class="cover-summary-label">Executive Summary</span>
+            <p class="cover-summary-content">
+                <strong>The problem:</strong> 1,000+ employees, a 2 person L&D team, and 40+ hours to produce each training module. Constant backlog, burnout, and declining quality.<br><br>
+                <strong>What I built:</strong> An AI powered content pipeline with prompt engineered workflows and automated verification loops.<br><br>
+                <strong>The result:</strong> 75% reduction in production time, 4x output capacity, and a shift from reactive content assembly to strategic learning design.
+            </p>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 16px; margin-bottom: 0; font-style: italic;">Some details have been adjusted to protect confidential information.</p>
+        </div>
+
+        <div class="cover-footer">
+            <div class="cover-author-info">
+                <span class="cover-author-name">Joshua Stringer</span>
+                <span class="cover-author-title">L&D Manager · Learning Architect · AI Systems Builder</span>
+            </div>
+            <div class="cover-tools">
+                <span class="cover-tool">GPT-4</span>
+                <span class="cover-tool">Gemini</span>
+                <span class="cover-tool">Stable Diffusion</span>
+                <span class="cover-tool">Python</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== PAGE 2: THE CHALLENGE ==================== -->
+<div class="page">
+    <div class="page-content">
+    <div class="page-main">
+    <div class="page-header">
+        <span class="page-header-brand">Joshua Stringer · AI Content Pipeline Case Study</span>
+        <span class="page-header-num">02</span>
+    </div>
+
+    <h2>The Challenge</h2>
+    <p class="lead" style="margin-bottom: 36px;">The L&D team I managed faced an impossible equation: 1,000+ employees across government and healthcare programs, constantly evolving compliance requirements, and just two people to design, develop, and deliver all training content.</p>
+
+    <!-- Challenge Stats Row -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px;">
+        <div style="background: var(--negative-dim); border: 1px solid rgba(232, 92, 92, 0.2); border-radius: 10px; padding: 24px 20px; text-align: center;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 700; color: var(--negative); line-height: 1;">40+</div>
+            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 8px;">hours per module</div>
+        </div>
+        <div style="background: var(--negative-dim); border: 1px solid rgba(232, 92, 92, 0.2); border-radius: 10px; padding: 24px 20px; text-align: center;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 700; color: var(--negative); line-height: 1;">Weeks</div>
+            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 8px;">long content queues</div>
+        </div>
+        <div style="background: var(--negative-dim); border: 1px solid rgba(232, 92, 92, 0.2); border-radius: 10px; padding: 24px 20px; text-align: center;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 700; color: var(--negative); line-height: 1;">Burnout</div>
+            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 8px;">from repetitive work</div>
+        </div>
+        <div style="background: var(--negative-dim); border: 1px solid rgba(232, 92, 92, 0.2); border-radius: 10px; padding: 24px 20px; text-align: center;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 700; color: var(--negative); line-height: 1;">Quality</div>
+            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 8px;">suffering under pressure</div>
+        </div>
+    </div>
+
+    <h3>What This Looked Like Day to Day</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px;">
+        <div>
+            <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.8;">Every new compliance update meant weeks of work. Every program launch meant scrambling. We were skipping storyboarding steps, forgetting to include content during rushed builds, and watching typos slip through because there was no time for proper review.</p>
+        </div>
+        <div>
+            <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.8;">Trainings became walls of text because we didn't have time to build interactions. Quality was inconsistent. The team was burning out on repetitive assembly work, and there was no capacity for strategic thinking.</p>
+        </div>
+    </div>
+
+    <div class="pull-quote" style="margin-top: 48px;">
+        <p>"Something had to change. Not incrementally. Fundamentally."</p>
+    </div>
+    </div><!-- end page-main -->
+
+    <div class="page-footer">
+        <span class="footer-text">Joshua Stringer</span>
+        <span class="footer-text">josh.stringer62@gmail.com</span>
+    </div>
+    </div><!-- end page-content -->
+</div>
+
+<!-- ==================== PAGE 3: THE SOLUTION ==================== -->
+<div class="page">
+    <div class="page-content">
+    <div class="page-main">
+    <div class="page-header">
+        <span class="page-header-brand">Joshua Stringer · AI Content Pipeline Case Study</span>
+        <span class="page-header-num">03</span>
+    </div>
+
+    <h2>The Solution</h2>
+    <p class="lead">The insight that changed everything: most L&D content follows predictable patterns. Roughly 60 to 70% of content creation is assembly, not creativity. Most L&D teams don't see this. I did.</p>
+
+    <p style="font-size: 14px; color: var(--text-secondary); margin: 20px 0 32px 0;">AI excels at pattern based generation. The bottleneck wasn't talent. It was process. So I designed a pipeline: a series of interconnected, prompt engineered workflows where each stage feeds the next.</p>
+
+    <div class="pipeline-container" style="padding: 32px;">
+        <div class="pipeline-header">
+            <span class="pipeline-title">8 Stage AI Pipeline with Verification Loops</span>
+            <div class="pipeline-legend">
+                <div class="legend-item"><span class="legend-dot ai"></span> AI Generation</div>
+                <div class="legend-item"><span class="legend-dot human"></span> Human Review</div>
+                <div class="legend-item"><span class="legend-dot verify"></span> AI Verification</div>
+            </div>
+        </div>
+
+        <div class="pipeline-stages">
+            <div class="stage ai">
+                <span class="stage-type">🤖</span>
+                <div class="stage-num">Stage 1</div>
+                <div class="stage-name">Outline Generation</div>
+                <div class="stage-desc">AI creates structure from objectives + SME inputs</div>
+            </div>
+            <div class="stage human">
+                <span class="stage-type">👤</span>
+                <div class="stage-num">Stage 2</div>
+                <div class="stage-name">Structure Review</div>
+                <div class="stage-desc">Human approves direction before drafting</div>
+            </div>
+            <div class="stage ai">
+                <span class="stage-type">🤖</span>
+                <div class="stage-num">Stage 3</div>
+                <div class="stage-name">Draft Creation</div>
+                <div class="stage-desc">AI generates content for each section</div>
+            </div>
+            <div class="stage verify">
+                <span class="stage-type">✓</span>
+                <div class="stage-num">Stage 4</div>
+                <div class="stage-name">AI Verification</div>
+                <div class="stage-desc">Checks against original objectives</div>
+            </div>
+            <div class="stage ai">
+                <span class="stage-type">🤖</span>
+                <div class="stage-num">Stage 5</div>
+                <div class="stage-name">Interaction Design</div>
+                <div class="stage-desc">Creates engagement elements + knowledge checks</div>
+            </div>
+            <div class="stage human">
+                <span class="stage-type">👤</span>
+                <div class="stage-num">Stage 6</div>
+                <div class="stage-name">Content Review</div>
+                <div class="stage-desc">Human reviews near complete training</div>
+            </div>
+            <div class="stage verify">
+                <span class="stage-type">✓</span>
+                <div class="stage-num">Stage 7</div>
+                <div class="stage-name">QA + Learner Sim</div>
+                <div class="stage-desc">AI reviews as learner + senior ID</div>
+            </div>
+            <div class="stage human">
+                <span class="stage-type">👤</span>
+                <div class="stage-num">Stage 8</div>
+                <div class="stage-name">Ship</div>
+                <div class="stage-desc">Final approval + stakeholder signoff</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="insight-box" style="margin-top: 28px;">
+        <span class="insight-icon">💡</span>
+        <div class="insight-text">
+            <strong>The key innovation:</strong> Every stage had a verification loop. AI didn't just generate. It checked its own work against requirements before humans ever saw it. When it caught errors, it fixed them automatically. This meant human reviewers spent time on judgment calls, not catching obvious mistakes.
+        </div>
+    </div>
+
+    </div><!-- end page-main -->
+
+    <div class="page-footer">
+        <span class="footer-text">Joshua Stringer</span>
+        <span class="footer-text">josh.stringer62@gmail.com</span>
+    </div>
+    </div><!-- end page-content -->
+</div>
+
+<!-- ==================== PAGE 4: HOW I BUILT IT ==================== -->
+<div class="page">
+    <div class="page-content">
+    <div class="page-main">
+    <div class="page-header">
+        <span class="page-header-brand">Joshua Stringer · AI Content Pipeline Case Study</span>
+        <span class="page-header-num">04</span>
+    </div>
+
+    <h2>How I Built It</h2>
+    <p class="lead" style="margin-bottom: 28px;">This wasn't a team initiative I participated in. I identified the opportunity, designed the solution, and built it myself.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px;">
+        <div class="card" style="padding: 20px; border-color: rgba(107, 159, 255, 0.2);">
+            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--ai-color); margin-bottom: 12px; font-weight: 600;">What I Built</p>
+            <ul style="margin-bottom: 0;">
+                <li>8 stage pipeline architecture from scratch</li>
+                <li>Prompt library engineered for each stage</li>
+                <li>Python automation to orchestrate the workflow</li>
+                <li>AI to AI verification loops for quality control</li>
+            </ul>
+        </div>
+        <div class="card" style="padding: 20px; border-color: rgba(107, 159, 255, 0.2);">
+            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--ai-color); margin-bottom: 12px; font-weight: 600;">How I Approached It</p>
+            <ul style="margin-bottom: 0;">
+                <li>Evaluated and selected AI tools (GPT-4, Gemini, Stable Diffusion)</li>
+                <li>Used AI assisted development. No engineering team.</li>
+                <li>Structured work in Agile format with epics and stories</li>
+                <li>Designed for enterprise reality: stakeholders, compliance, approvals</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Prompt Engineering: The Real Differentiator</h3>
+    <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 24px;">Each stage in the pipeline relied on carefully engineered prompts. This is the difference between "I use ChatGPT" and building production systems.</p>
+
+    <div class="before-after" style="margin-bottom: 0;">
+        <div class="before-box">
+            <div class="box-label">Typical Approach</div>
+            <div class="box-content" style="font-size: 13px; line-height: 1.6;">
+                Write a training module about HIPAA for customer service reps.
+            </div>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(232, 92, 92, 0.15);">
+                <span style="font-size: 11px; color: var(--negative);">Result: Generic content, wrong tone, no context, unusable without heavy editing</span>
+            </div>
+        </div>
+        <div class="after-box">
+            <div class="box-label">Engineered Prompt Structure</div>
+            <div class="box-content" style="font-size: 12px; line-height: 1.7;">
+                <span style="color: var(--accent); font-weight: 600;">AGENT ROLE</span><br>
+                <span style="color: var(--text-secondary);">Senior instructional designer, 15yr healthcare compliance, scenario based learning specialist</span><br><br>
+                <span style="color: var(--accent); font-weight: 600;">REFERENCES</span><br>
+                <span style="color: var(--text-secondary);">Company policy, HHS guidelines, OCR enforcement cases, SME transcript</span><br><br>
+                <span style="color: var(--accent); font-weight: 600;">TASK + CONSTRAINTS</span><br>
+                <span style="color: var(--text-secondary);">Generate outline with objectives. 20min total, 8th grade reading level, practical focus on what CSRs actually encounter.</span>
+            </div>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(78, 203, 141, 0.15);">
+                <span style="font-size: 11px; color: var(--accent);">Result: Structured, contextual, ready for human review</span>
+            </div>
+        </div>
+    </div>
+
+    <details style="margin-top: 20px;">
+        <summary style="cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ai-color); padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 8px; list-style: none; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 14px;">▶</span> View Full Production Prompt
+        </summary>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-default); border-top: none; border-radius: 0 0 8px 8px; padding: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; line-height: 1.8; color: var(--text-secondary); max-height: 400px; overflow-y: auto;">
+            <span style="color: var(--accent); font-weight: 600;">## SYSTEM CONTEXT</span><br>
+            You are integrated into an L&D content pipeline for a healthcare services organization (1,000+ employees). Your outputs feed directly into the next stage of the pipeline. Consistency and format compliance are critical.<br><br>
+
+            <span style="color: var(--accent); font-weight: 600;">## AGENT PERSONA</span><br>
+            You are a senior instructional designer with 15 years of experience in healthcare compliance training. Your specialization: scenario based learning for frontline employees. You have worked with HIPAA, OSHA, and CMS compliance programs. You prioritize practical application over legal jargon. You know that adult learners need to understand "why this matters to MY job" within the first 60 seconds.<br><br>
+
+            <span style="color: var(--accent); font-weight: 600;">## REFERENCE MATERIALS PROVIDED</span><br>
+            <span style="color: var(--text-muted);">[The following documents are attached to this prompt]</span><br>
+            • REF_001: Company Privacy Policy v3.2 (internal document)<br>
+            • REF_002: HHS.gov HIPAA Privacy Rule Summary (public)<br>
+            • REF_003: OCR Enforcement Highlights 2024 (3 relevant cases)<br>
+            • REF_004: SME Interview Transcript, Compliance Officer, 45 min<br>
+            • REF_005: Previous HIPAA training (what to improve upon)<br><br>
+
+            <span style="color: var(--accent); font-weight: 600;">## AUDIENCE PROFILE</span><br>
+            • Role: Customer Service Representatives (new hires, 0 to 30 days)<br>
+            • Prior knowledge: Assume zero HIPAA familiarity<br>
+            • Work context: Phone based, handling member inquiries, accessing PHI in CRM<br>
+            • Common mistakes: Verbal disclosure, screen sharing, misdirected faxes<br>
+            • Motivation: They want to help members; compliance feels like a blocker<br><br>
+
+            <span style="color: var(--accent); font-weight: 600;">## STAKEHOLDER REQUEST</span><br>
+            "We need HIPAA training for new CSRs. Around 20 minutes. Make it practical, not legal. They need to know what they can and cannot say on calls."<br><br>
+
+            <span style="color: var(--accent); font-weight: 600;">## YOUR TASK</span><br>
+            Generate a structured module outline for this training. Your output will be reviewed by a human ID, then passed to the content drafting stage.<br><br>
+
+            <span style="color: var(--ai-color);">Step 1: Learning Objectives</span><br>
+            • Extract 2 to 3 measurable objectives from the request + references<br>
+            • Format: "After completing this module, learners will be able to [verb] [specific outcome]"<br>
+            • At least one objective must address the "common mistakes" listed above<br><br>
+
+            <span style="color: var(--ai-color);">Step 2: Module Outline</span><br>
+            • Introduction (90 sec max): Real scenario hook. Not "HIPAA was enacted in 1996."<br>
+            • 3 to 4 content sections with: Section title, key points (3 to 5 bullets), time estimate, one engagement element (scenario, check your understanding, reflection prompt)<br>
+            • Knowledge check placement: After section 2 and before summary<br>
+            • Summary: Key takeaways + where to find help<br><br>
+
+            <span style="color: var(--accent); font-weight: 600;">## OUTPUT FORMAT</span><br>
+            <span style="color: var(--text-muted);">Use this exact structure. The next pipeline stage parses this format.</span><br><br>
+            OBJECTIVES:<br>
+            1. [objective]<br>
+            2. [objective]<br><br>
+            OUTLINE:<br>
+            [Section Name] | [Time] | [Type: content/interactive/assessment]<br>
+            • Key point<br>
+            • Key point<br>
+            • Engagement: [description]<br><br>
+
+            <span style="color: var(--accent); font-weight: 600;">## QUALITY CRITERIA</span><br>
+            <span style="color: var(--verify-color);">Before submitting, verify:</span><br>
+            • Total time sums to 18 to 22 minutes<br>
+            • Every objective maps to at least one content section<br>
+            • No section exceeds 5 minutes (attention span limit)<br>
+            • At least 2 engagement elements that require learner action<br>
+            • Zero legal jargon without plain English explanation<br>
+            • References specific scenarios from REF_004 (SME interview)<br><br>
+
+            <span style="color: var(--accent); font-weight: 600;">## WHAT TO AVOID</span><br>
+            • Starting with history or definitions<br>
+            • "HIPAA stands for..." (they don't care)<br>
+            • Passive voice in objectives<br>
+            • Generic scenarios ("a healthcare worker...")<br>
+            • More than 5 bullet points per section<br>
+            • Compliance theater: content that checks a box but doesn't change behavior
+        </div>
+    </details>
+
+    <div class="print-only" style="margin-top: 16px; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 8px;">
+        <p style="font-size: 11px; color: var(--text-tertiary); margin: 0;">
+            <span style="color: var(--ai-color); font-weight: 600;">Full 65-line production prompt</span> — Available in the interactive HTML version of this case study.
+        </p>
+    </div>
+
+    </div><!-- end page-main -->
+
+    <div class="page-footer">
+        <span class="footer-text">Joshua Stringer</span>
+        <span class="footer-text">josh.stringer62@gmail.com</span>
+    </div>
+    </div><!-- end page-content -->
+</div>
+
+<!-- ==================== PAGE 5: RESULTS + LESSONS ==================== -->
+<div class="page">
+    <div class="page-content">
+    <div class="page-main">
+    <div class="page-header">
+        <span class="page-header-brand">Joshua Stringer · AI Content Pipeline Case Study</span>
+        <span class="page-header-num">05</span>
+    </div>
+
+    <h2>The Results</h2>
+
+    <div class="results-grid">
+        <div class="result-card">
+            <div class="result-value">75%</div>
+            <div class="result-label">Reduction in<br>production time</div>
+        </div>
+        <div class="result-card">
+            <div class="result-value">4x</div>
+            <div class="result-label">Increase in content<br>output capacity</div>
+        </div>
+        <div class="result-card">
+            <div class="result-value">0</div>
+            <div class="result-label">Skipped steps or<br>forgotten content</div>
+        </div>
+    </div>
+
+    <div class="two-col">
+        <div>
+            <h3>What This Enabled</h3>
+            <ul>
+                <li>I shifted my team from content factory mode to strategic learning design</li>
+                <li>Freed up time for needs analysis, program evaluation, and stakeholder strategy</li>
+                <li>Eliminated burnout from repetitive assembly work</li>
+                <li>Trainings had more interactions and engagement, not fewer</li>
+            </ul>
+        </div>
+        <div>
+            <div class="insight-box" style="height: 100%; display: flex; align-items: center; justify-content: center;">
+                <div class="insight-text" style="text-align: center;">
+                    <strong>The remaining 10 hours</strong> wasn't AI being slow. It was human review cycles, stakeholder approvals, and SME signoffs. These are the parts that <em>should</em> take time in enterprise L&D. The pipeline eliminated wasted time while preserving necessary time.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>What I Learned</h2>
+
+    <div class="lessons-grid">
+        <div class="lesson">
+            <div class="lesson-num">01</div>
+            <div class="lesson-title">Structure beats speed</div>
+            <div class="lesson-desc">The biggest gains came from eliminating skipped steps, not from faster typing. A slower, structured process beat a rushed one every time.</div>
+        </div>
+        <div class="lesson">
+            <div class="lesson-num">02</div>
+            <div class="lesson-title">Verification loops are essential</div>
+            <div class="lesson-desc">Letting AI check its own work before human review dramatically reduced wasted feedback cycles.</div>
+        </div>
+        <div class="lesson">
+            <div class="lesson-num">03</div>
+            <div class="lesson-title">Design for real constraints</div>
+            <div class="lesson-desc">Enterprise L&D has stakeholders and compliance requirements. Build for reality, not demos.</div>
+        </div>
+        <div class="lesson">
+            <div class="lesson-num">04</div>
+            <div class="lesson-title">AI amplifies deep expertise</div>
+            <div class="lesson-desc">Five years of L&D experience taught me what makes training work. AI scaled that expertise. It handled assembly; I handled architecture and judgment.</div>
+        </div>
+    </div>
+
+    </div><!-- end page-main -->
+
+    <div class="page-footer">
+        <span class="footer-text">Joshua Stringer</span>
+        <span class="footer-text">josh.stringer62@gmail.com</span>
+    </div>
+    </div><!-- end page-content -->
+</div>
+
+<!-- ==================== PAGE 6: LET'S CONNECT ==================== -->
+<div class="page">
+    <div class="page-content">
+    <div class="page-main" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+
+        <span class="eyebrow" style="margin-bottom: 20px;">What's Next</span>
+        <h1 style="font-size: 48px; margin-bottom: 24px;">Let's Build<br><span class="highlight">Something Together</span></h1>
+        <p class="lead" style="max-width: 520px; margin-bottom: 48px;">I architect AI enabled learning systems. I build the pipelines, the automation, the infrastructure that lets L&D teams scale. I'm looking for an organization ready to build one.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; max-width: 700px; margin-bottom: 48px;">
+            <div class="card" style="text-align: center; padding: 28px 20px;">
+                <div style="font-size: 28px; margin-bottom: 12px;">🏗️</div>
+                <h3 style="font-size: 14px; margin-bottom: 8px;">Build Systems</h3>
+                <p style="font-size: 12px; color: var(--text-tertiary); margin: 0;">AI powered pipelines, automation workflows, scalable L&D infrastructure</p>
+            </div>
+            <div class="card" style="text-align: center; padding: 28px 20px;">
+                <div style="font-size: 28px; margin-bottom: 12px;">🧠</div>
+                <h3 style="font-size: 14px; margin-bottom: 8px;">Solve Problems</h3>
+                <p style="font-size: 12px; color: var(--text-tertiary); margin: 0;">Training bottlenecks, content velocity, quality at scale, team enablement</p>
+            </div>
+            <div class="card" style="text-align: center; padding: 28px 20px;">
+                <div style="font-size: 28px; margin-bottom: 12px;">💬</div>
+                <h3 style="font-size: 14px; margin-bottom: 8px;">Have Conversations</h3>
+                <p style="font-size: 12px; color: var(--text-tertiary); margin: 0;">Let's explore what's possible. Sometimes the best ideas come from a simple chat.</p>
+            </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 16px; padding: 36px 48px; text-align: center; max-width: 500px;">
+            <h2 style="font-size: 22px; margin-bottom: 8px;">Joshua Stringer</h2>
+            <p style="font-size: 13px; color: var(--text-tertiary); margin-bottom: 24px;">L&D Manager · Learning Architect · AI Systems Builder</p>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                <a href="mailto:josh.stringer62@gmail.com" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--accent); text-decoration: none;">josh.stringer62@gmail.com</a>
+                <a href="https://linkedin.com/in/josh-stringer" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ai-color); text-decoration: none;">linkedin.com/in/josh-stringer</a>
+                <span style="font-size: 13px; color: var(--text-muted);">Gilbert, AZ · Open to Remote</span>
+            </div>
+        </div>
+
+        <p style="margin-top: 48px; font-size: 13px; color: var(--text-muted); max-width: 400px;">Even if you're not hiring right now, I'd love to connect. The best opportunities often start with a conversation.</p>
+
+    </div><!-- end page-main -->
+    </div><!-- end page-content -->
+</div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="site-footer-links">
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="how-i-work.html">How I Work</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://www.linkedin.com/in/josh-stringer/" target="_blank">LinkedIn</a>
+        </div>
+        <p class="site-footer-copy">Joshua Stringer · Gilbert, AZ · josh.stringer62@gmail.com</p>
+        <p class="site-footer-copyright">© 2025 Joshua Stringer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Ownership fingerprint
+        console.log('%c🔒 This site is the intellectual property of Joshua Stringer', 'font-size: 14px; font-weight: bold; color: #4ecb8d;');
+        console.log('%cUnique ID: JSTR-2025-AIP-P1Q2R3 | © 2025 All Rights Reserved', 'font-size: 11px; color: #888;');
+        console.log('%cUnauthorized copying or reproduction is prohibited.', 'font-size: 11px; color: #e85c5c;');
+        console.log('%cContact: josh.stringer62@gmail.com', 'font-size: 11px; color: #888;');
+    </script>
+</body>
+</html>

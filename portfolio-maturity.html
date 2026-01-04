@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  JOSHUA STRINGER - PORTFOLIO WEBSITE
+  ============================================================================
+
+  Copyright (c) 2025 Joshua Stringer. All rights reserved.
+
+  This source code and design are the intellectual property of Joshua Stringer.
+  Unauthorized copying, modification, distribution, or use of this code,
+  design, or any derivative works is strictly prohibited without explicit
+  written permission from the author.
+
+  Contact: josh.stringer62@gmail.com
+  LinkedIn: linkedin.com/in/josh-stringer
+
+  ============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&D Technology Maturity Model | Joshua Stringer</title>
+    <meta name="description" content="Diagnostic tool showing four stages of L&D technology maturity - from chaos to strategic advantage.">
+    <meta name="author" content="Joshua Stringer">
+    <meta name="copyright" content="Copyright (c) 2025 Joshua Stringer. All rights reserved.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jstringer.com/portfolio-maturity.html">
+    <meta property="og:title" content="L&D Technology Maturity Model | Joshua Stringer">
+    <meta property="og:description" content="Diagnostic tool showing four stages of L&D technology maturity - from chaos to strategic advantage.">
+    <meta property="og:image" content="https://jstringer.com/profile-headshot.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ3Y65TGTY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DQ3Y65TGTY');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page-specific variables for maturity levels */
+        :root {
+            --verify-color: #a78bfa;
+            --verify-dim: rgba(167, 139, 250, 0.15);
+            --level-1: #e85c5c;
+            --level-1-dim: rgba(232, 92, 92, 0.12);
+            --level-2: #e8a84c;
+            --level-2-dim: rgba(232, 168, 76, 0.12);
+            --level-3: #6b9fff;
+            --level-3-dim: rgba(107, 159, 255, 0.12);
+            --level-4: #4ecb8d;
+            --level-4-dim: rgba(78, 203, 141, 0.12);
+        }
+
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        body {
+            padding: 100px 0 40px 0;
+        }
+
+        @media (max-width: 900px) {
+            body { padding-top: 80px; }
+            .page { width: 100%; height: auto; padding: 24px; border-radius: 0; }
+        }
+
+        /* Page structure - single page for print */
+        .page {
+            width: 8.5in;
+            height: 11in;
+            padding: 0.5in 0.55in;
+            margin: 0 auto;
+            background: var(--bg-base);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Progress arrow bar */
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 14px 20px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 10px;
+        }
+
+        .progress-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .progress-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .progress-dot.level-1 { background: var(--level-1); }
+        .progress-dot.level-2 { background: var(--level-2); }
+        .progress-dot.level-3 { background: var(--level-3); }
+        .progress-dot.level-4 { background: var(--level-4); }
+
+        .progress-arrow {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .progress-end-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+
+        /* Levels grid */
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        .level-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 12px;
+            padding: 18px 16px 72px 16px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .level-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .level-card.level-1::before { background: var(--level-1); }
+        .level-card.level-2::before { background: var(--level-2); }
+        .level-card.level-3::before { background: var(--level-3); }
+        .level-card.level-4::before { background: var(--level-4); }
+
+        .level-card.level-1 { border-color: rgba(232, 92, 92, 0.25); }
+        .level-card.level-2 { border-color: rgba(232, 168, 76, 0.25); }
+        .level-card.level-3 { border-color: rgba(107, 159, 255, 0.25); }
+        .level-card.level-4 { border-color: rgba(78, 203, 141, 0.25); }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .level-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .level-1 .level-icon { background: var(--level-1-dim); }
+        .level-2 .level-icon { background: var(--level-2-dim); }
+        .level-3 .level-icon { background: var(--level-3-dim); }
+        .level-4 .level-icon { background: var(--level-4-dim); }
+
+        .level-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .level-1 .level-num { color: var(--level-1); }
+        .level-2 .level-num { color: var(--level-2); }
+        .level-3 .level-num { color: var(--level-3); }
+        .level-4 .level-num { color: var(--level-4); }
+
+        .level-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .level-characteristics {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .level-characteristics li {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding-left: 14px;
+            position: relative;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .level-characteristics li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+
+        .level-pain {
+            background: var(--bg-elevated);
+            border-radius: 8px;
+            padding: 10px 12px;
+            position: absolute;
+            bottom: 18px;
+            left: 16px;
+            right: 16px;
+            height: 70px;
+            overflow: hidden;
+        }
+
+        .pain-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin: 0 0 6px 0;
+            display: block;
+            line-height: 1;
+        }
+
+        .pain-text {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.35;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Diagnostic section */
+        .diagnostic {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 18px;
+        }
+
+        .diagnostic-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .diagnostic-icon {
+            font-size: 16px;
+        }
+
+        .diagnostic-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .diagnostic-questions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .diagnostic-q {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .q-marker {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .q-text {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .q-result {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* CTA Footer */
+        .cta-footer {
+            background: linear-gradient(135deg, var(--accent-dim) 0%, var(--ai-dim) 100%);
+            border: 1px solid rgba(78, 203, 141, 0.2);
+            border-radius: 12px;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-text h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .cta-text p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .cta-author {
+            text-align: right;
+        }
+
+        .author-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .author-email {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: var(--bg-base);
+                padding: 0;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ownership Watermark - JSTR-2025-MAT-V7W8X9 -->
+    <div data-owner="joshua-stringer" data-site-id="jstr-2025-mat" data-created="2025" aria-hidden="true" style="display:none!important"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">Josh Stringer</a>
+        <a href="portfolio.html" class="nav-back">← Back to Portfolio</a>
+        <a href="contact.html" class="nav-cta">Get in touch</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="portfolio.html">Portfolio</a>
+        <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="mobile-dropdown-label">Case Study</span></a>
+        <a href="portfolio-roi.html">The ROI Question<span class="mobile-dropdown-label">Framework</span></a>
+        <a href="portfolio-maturity.html">L&D Maturity Model<span class="mobile-dropdown-label">Diagnostic</span></a>
+        <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="mobile-dropdown-label">Journey Map</span></a>
+        <a href="about.html">About</a>
+        <a href="how-i-work.html">How I Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+<div class="page">
+    <!-- Header -->
+    <div class="header">
+        <span class="eyebrow">Framework</span>
+        <h1>L&D Technology Maturity Model</h1>
+        <p class="subtitle">Where does your organization stand? Most L&D teams are stuck at Level 2, measuring completions while leadership asks for ROI.</p>
+    </div>
+
+    <!-- Progress indicator -->
+    <div class="progress-bar">
+        <span class="progress-label">Chaos</span>
+        <div class="progress-dots">
+            <div class="progress-dot level-1"></div>
+            <span class="progress-arrow">→</span>
+            <div class="progress-dot level-2"></div>
+            <span class="progress-arrow">→</span>
+            <div class="progress-dot level-3"></div>
+            <span class="progress-arrow">→</span>
+            <div class="progress-dot level-4"></div>
+        </div>
+        <span class="progress-end-label">Competitive Advantage</span>
+    </div>
+
+    <!-- 4 Level Cards -->
+    <div class="levels-grid">
+        <!-- Level 1 -->
+        <div class="level-card level-1">
+            <div class="level-header">
+                <div class="level-icon">🗂️</div>
+                <span class="level-num">Level 1</span>
+            </div>
+            <div class="level-name">Fragmented</div>
+            <ul class="level-characteristics">
+                <li>No LMS or barely adopted</li>
+                <li>Content scattered in shared drives</li>
+                <li>Tracking via spreadsheets</li>
+                <li>Tribal knowledge dominates</li>
+            </ul>
+            <div class="level-pain">
+                <span class="pain-label">The Pain</span>
+                <p class="pain-text">"We don't know who's trained on what"</p>
+            </div>
+        </div>
+
+        <!-- Level 2 -->
+        <div class="level-card level-2">
+            <div class="level-header">
+                <div class="level-icon">📚</div>
+                <span class="level-num">Level 2</span>
+            </div>
+            <div class="level-name">Centralized</div>
+            <ul class="level-characteristics">
+                <li>LMS in place and adopted</li>
+                <li>Basic completion tracking</li>
+                <li>Content creation still manual</li>
+                <li>Reports exist but siloed</li>
+            </ul>
+            <div class="level-pain">
+                <span class="pain-label">The Pain</span>
+                <p class="pain-text">"We have data but can't prove impact"</p>
+            </div>
+        </div>
+
+        <!-- Level 3 -->
+        <div class="level-card level-3">
+            <div class="level-header">
+                <div class="level-icon">🔗</div>
+                <span class="level-num">Level 3</span>
+            </div>
+            <div class="level-name">Integrated</div>
+            <ul class="level-characteristics">
+                <li>Systems connected (LMS↔HRIS)</li>
+                <li>Data flows automatically</li>
+                <li>Some workflow automation</li>
+                <li>Starting to measure outcomes</li>
+            </ul>
+            <div class="level-pain">
+                <span class="pain-label">The Pain</span>
+                <p class="pain-text">"We're efficient but not strategic yet"</p>
+            </div>
+        </div>
+
+        <!-- Level 4 -->
+        <div class="level-card level-4">
+            <div class="level-header">
+                <div class="level-icon">🤖</div>
+                <span class="level-num">Level 4</span>
+            </div>
+            <div class="level-name">AI-Enabled</div>
+            <ul class="level-characteristics">
+                <li>AI accelerates content creation</li>
+                <li>Automated verification workflows</li>
+                <li>ROI measured and proven</li>
+                <li>Predictive learning insights</li>
+            </ul>
+            <div class="level-pain">
+                <span class="pain-label">The Advantage</span>
+                <p class="pain-text">"L&D is a strategic driver, not a cost center"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Diagnostic -->
+    <div class="diagnostic">
+        <div class="diagnostic-header">
+            <span class="diagnostic-icon">🎯</span>
+            <span class="diagnostic-title">Quick Diagnostic: Where Are You?</span>
+        </div>
+        <div class="diagnostic-questions">
+            <div class="diagnostic-q">
+                <span class="q-marker">Q1</span>
+                <div>
+                    <p class="q-text">Can you pull a report showing who completed what training last month?</p>
+                    <p class="q-result">No → Level 1 | Yes → Level 2+</p>
+                </div>
+            </div>
+            <div class="diagnostic-q">
+                <span class="q-marker">Q2</span>
+                <div>
+                    <p class="q-text">Does your training data automatically sync with HR systems?</p>
+                    <p class="q-result">No → Level 2 | Yes → Level 3+</p>
+                </div>
+            </div>
+            <div class="diagnostic-q">
+                <span class="q-marker">Q3</span>
+                <div>
+                    <p class="q-text">Can you prove training ROI with connected business metrics?</p>
+                    <p class="q-result">No → Level 3 | Yes → Level 4</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Footer -->
+    <div class="cta-footer">
+        <div class="cta-text">
+            <h3>I help L&D teams reach Level 4.</h3>
+            <p>AI-enabled systems. Measurable outcomes. Strategic advantage.</p>
+        </div>
+        <div class="cta-author">
+            <div class="author-name">Joshua Stringer</div>
+            <div class="author-email">josh.stringer62@gmail.com</div>
+        </div>
+    </div>
+</div>
+
+    <footer class="site-footer">
+        <div class="site-footer-links">
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="how-i-work.html">How I Work</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://www.linkedin.com/in/josh-stringer/" target="_blank">LinkedIn</a>
+        </div>
+        <p class="site-footer-copy">Joshua Stringer · Gilbert, AZ · josh.stringer62@gmail.com</p>
+        <p class="site-footer-copyright">© 2025 Joshua Stringer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Ownership fingerprint
+        console.log('%c🔒 This site is the intellectual property of Joshua Stringer', 'font-size: 14px; font-weight: bold; color: #4ecb8d;');
+        console.log('%cUnique ID: JSTR-2025-MAT-V7W8X9 | © 2025 All Rights Reserved', 'font-size: 11px; color: #888;');
+        console.log('%cUnauthorized copying or reproduction is prohibited.', 'font-size: 11px; color: #e85c5c;');
+        console.log('%cContact: josh.stringer62@gmail.com', 'font-size: 11px; color: #888;');
+    </script>
+</body>
+</html>

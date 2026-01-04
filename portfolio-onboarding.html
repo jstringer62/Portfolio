@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  JOSHUA STRINGER - PORTFOLIO WEBSITE
+  ============================================================================
+
+  Copyright (c) 2025 Joshua Stringer. All rights reserved.
+
+  This source code and design are the intellectual property of Joshua Stringer.
+  Unauthorized copying, modification, distribution, or use of this code,
+  design, or any derivative works is strictly prohibited without explicit
+  written permission from the author.
+
+  Contact: josh.stringer62@gmail.com
+  LinkedIn: linkedin.com/in/josh-stringer
+
+  ============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Hire Onboarding Journey Map | Josh Stringer</title>
+    <meta name="description" content="Onboarding framework covering the first 90 days - touchpoints, emotions, pain points, and L&D interventions.">
+    <meta name="author" content="Joshua Stringer">
+    <meta name="copyright" content="Copyright (c) 2025 Joshua Stringer. All rights reserved.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jstringer.com/portfolio-onboarding.html">
+    <meta property="og:title" content="New Hire Onboarding Journey Map | Joshua Stringer">
+    <meta property="og:description" content="Onboarding framework covering the first 90 days - touchpoints, emotions, pain points, and L&D interventions.">
+    <meta property="og:image" content="https://jstringer.com/profile-headshot.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ3Y65TGTY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DQ3Y65TGTY');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page-specific variables */
+        :root {
+            --accent-purple: #a78bfa;
+            --accent-purple-dim: rgba(167, 139, 250, 0.15);
+        }
+
+        body {
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        @media (max-width: 1200px) {
+            .page { width: 100%; min-height: auto; padding: 24px; overflow-x: auto; }
+        }
+
+        .page {
+            width: 11in;
+            min-height: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: var(--bg-base);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.35in;
+            padding-bottom: 0.2in;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .header-left h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .header-left h1 span {
+            color: var(--accent);
+        }
+
+        .header-left .subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right .tagline {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            color: var(--ai-color);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .header-right .description {
+            font-size: 11px;
+            color: var(--text-muted);
+            max-width: 280px;
+        }
+
+        /* Timeline Container */
+        .journey-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        /* Timeline Header Row */
+        .timeline-header {
+            display: grid;
+            grid-template-columns: 100px repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .timeline-label {
+            /* Empty first cell */
+        }
+
+        .stage-header {
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            padding: 10px 12px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .stage-header .stage-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .stage-header .stage-time {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        /* Progress Bar */
+        .progress-row {
+            display: grid;
+            grid-template-columns: 100px repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .progress-label {
+            font-size: 9px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .progress-track {
+            height: 6px;
+            background: linear-gradient(90deg,
+                var(--human-color) 0%,
+                var(--ai-color) 40%,
+                var(--accent) 100%
+            );
+            border-radius: 3px;
+            grid-column: 2 / -1;
+            position: relative;
+        }
+
+        .progress-markers {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 8%;
+        }
+
+        .progress-marker {
+            width: 10px;
+            height: 10px;
+            background: var(--bg-base);
+            border: 2px solid var(--text-primary);
+            border-radius: 50%;
+        }
+
+        /* Swimlane Rows */
+        .swimlane-row {
+            display: grid;
+            grid-template-columns: 100px repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .swimlane-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            padding-right: 8px;
+        }
+
+        .swimlane-label .icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .swimlane-label .icon svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .swimlane-cell {
+            background: var(--bg-card);
+            border-radius: 6px;
+            padding: 8px 10px;
+            border: 1px solid var(--border-subtle);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        /* Touchpoints Row */
+        .touchpoints .swimlane-label .icon {
+            background: var(--ai-dim);
+            color: var(--ai-color);
+        }
+
+        .touchpoints .swimlane-cell {
+            color: var(--text-secondary);
+        }
+
+        .touchpoint-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+            margin-bottom: 3px;
+        }
+
+        .touchpoint-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .touchpoint-item::before {
+            content: "•";
+            color: var(--ai-color);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Emotions Row */
+        .emotions .swimlane-label .icon {
+            background: var(--accent-purple-dim);
+            color: var(--accent-purple);
+        }
+
+        .emotion-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .emotion-emoji {
+            font-size: 14px;
+        }
+
+        .emotion-text {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Pain Points Row */
+        .pain-points .swimlane-label .icon {
+            background: var(--negative-dim);
+            color: var(--negative);
+        }
+
+        .pain-points .swimlane-cell {
+            background: var(--negative-dim);
+            border-color: rgba(248, 113, 113, 0.2);
+        }
+
+        .pain-item {
+            color: var(--negative);
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+            margin-bottom: 2px;
+        }
+
+        .pain-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .pain-item::before {
+            content: "✗";
+            flex-shrink: 0;
+            font-size: 8px;
+            margin-top: 2px;
+        }
+
+        /* L&D Interventions Row */
+        .interventions .swimlane-label .icon {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        .interventions .swimlane-cell {
+            background: var(--accent-dim);
+            border-color: rgba(52, 211, 153, 0.2);
+        }
+
+        .intervention-item {
+            color: var(--accent);
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+            margin-bottom: 2px;
+        }
+
+        .intervention-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .intervention-item::before {
+            content: "✓";
+            flex-shrink: 0;
+            font-size: 8px;
+            margin-top: 2px;
+        }
+
+        /* Metrics Row */
+        .metrics .swimlane-label .icon {
+            background: var(--human-dim);
+            color: var(--human-color);
+        }
+
+        .metric-item {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: var(--human-color);
+            background: var(--human-dim);
+            padding: 3px 6px;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 1px 2px 1px 0;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            padding-top: 0.2in;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .legend-dot.pain { background: var(--negative); }
+        .legend-dot.intervention { background: var(--accent); }
+        .legend-dot.metric { background: var(--human-color); }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .author-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .author-title {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        .contact-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: var(--accent);
+        }
+
+        /* Print Styles */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                margin: 0;
+                padding: 0;
+            }
+
+            .print-helper {
+                display: none !important;
+            }
+
+            .page {
+                width: 100vw;
+                height: 100vh;
+                min-height: auto;
+                padding: 0.35in 0.4in;
+                margin: 0;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Scale content to fill the page */
+            .journey-container {
+                transform-origin: top left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ownership Watermark - JSTR-2025-ONB-Y1Z2A3 -->
+    <div data-owner="joshua-stringer" data-site-id="jstr-2025-onb" data-created="2025" aria-hidden="true" style="display:none!important"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">Josh Stringer</a>
+        <a href="portfolio.html" class="nav-back">← Back to Portfolio</a>
+        <a href="contact.html" class="nav-cta">Get in touch</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="portfolio.html">Portfolio</a>
+        <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="mobile-dropdown-label">Case Study</span></a>
+        <a href="portfolio-roi.html">The ROI Question<span class="mobile-dropdown-label">Framework</span></a>
+        <a href="portfolio-maturity.html">L&D Maturity Model<span class="mobile-dropdown-label">Diagnostic</span></a>
+        <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="mobile-dropdown-label">Journey Map</span></a>
+        <a href="about.html">About</a>
+        <a href="how-i-work.html">How I Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>New Hire Onboarding <span>Journey Map</span></h1>
+                <div class="subtitle">The 90-Day Path from Hire to High Performer</div>
+            </div>
+            <div class="header-right">
+                <div class="tagline">L&D Best Practice Reference</div>
+                <div class="description">How world-class onboarding programs transform new hires into productive contributors</div>
+            </div>
+        </header>
+
+        <!-- Journey Container -->
+        <div class="journey-container">
+            <!-- Timeline Header -->
+            <div class="timeline-header">
+                <div class="timeline-label"></div>
+                <div class="stage-header">
+                    <div class="stage-name">Preboarding</div>
+                    <div class="stage-time">Offer → Day 1</div>
+                </div>
+                <div class="stage-header">
+                    <div class="stage-name">Day 1</div>
+                    <div class="stage-time">Orientation</div>
+                </div>
+                <div class="stage-header">
+                    <div class="stage-name">Week 1</div>
+                    <div class="stage-time">Foundation</div>
+                </div>
+                <div class="stage-header">
+                    <div class="stage-name">Weeks 2-4</div>
+                    <div class="stage-time">Role Training</div>
+                </div>
+                <div class="stage-header">
+                    <div class="stage-name">Days 30-60</div>
+                    <div class="stage-time">Application</div>
+                </div>
+                <div class="stage-header">
+                    <div class="stage-name">Days 60-90</div>
+                    <div class="stage-time">Independence</div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-row">
+                <div class="progress-label">Journey</div>
+                <div class="progress-track">
+                    <div class="progress-markers">
+                        <div class="progress-marker"></div>
+                        <div class="progress-marker"></div>
+                        <div class="progress-marker"></div>
+                        <div class="progress-marker"></div>
+                        <div class="progress-marker"></div>
+                        <div class="progress-marker"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Touchpoints Row -->
+            <div class="swimlane-row touchpoints">
+                <div class="swimlane-label">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </span>
+                    Touchpoints
+                </div>
+                <div class="swimlane-cell">
+                    <div class="touchpoint-item">Welcome email & package</div>
+                    <div class="touchpoint-item">Equipment setup</div>
+                    <div class="touchpoint-item">Manager intro call</div>
+                    <div class="touchpoint-item">Day 1 logistics</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="touchpoint-item">HR paperwork</div>
+                    <div class="touchpoint-item">Company overview</div>
+                    <div class="touchpoint-item">Team introductions</div>
+                    <div class="touchpoint-item">Workspace setup</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="touchpoint-item">Systems training</div>
+                    <div class="touchpoint-item">Compliance modules</div>
+                    <div class="touchpoint-item">Buddy assignment</div>
+                    <div class="touchpoint-item">1:1 with manager</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="touchpoint-item">Role specific training</div>
+                    <div class="touchpoint-item">Shadowing sessions</div>
+                    <div class="touchpoint-item">Practice exercises</div>
+                    <div class="touchpoint-item">Weekly checkins</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="touchpoint-item">First real projects</div>
+                    <div class="touchpoint-item">Feedback loops</div>
+                    <div class="touchpoint-item">Skill assessments</div>
+                    <div class="touchpoint-item">Cross team exposure</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="touchpoint-item">Full workload</div>
+                    <div class="touchpoint-item">90 day review</div>
+                    <div class="touchpoint-item">Goal setting</div>
+                    <div class="touchpoint-item">Development plan</div>
+                </div>
+            </div>
+
+            <!-- Emotions Row -->
+            <div class="swimlane-row emotions">
+                <div class="swimlane-label">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                    </span>
+                    Emotions
+                </div>
+                <div class="swimlane-cell">
+                    <div class="emotion-indicator">
+                        <span class="emotion-emoji">😊</span>
+                        <span class="emotion-text">Excited but anxious</span>
+                    </div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="emotion-indicator">
+                        <span class="emotion-emoji">😅</span>
+                        <span class="emotion-text">Overwhelmed, eager</span>
+                    </div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="emotion-indicator">
+                        <span class="emotion-emoji">🤔</span>
+                        <span class="emotion-text">Uncertain, learning</span>
+                    </div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="emotion-indicator">
+                        <span class="emotion-emoji">💪</span>
+                        <span class="emotion-text">Growing confidence</span>
+                    </div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="emotion-indicator">
+                        <span class="emotion-emoji">🎯</span>
+                        <span class="emotion-text">Focused, contributing</span>
+                    </div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="emotion-indicator">
+                        <span class="emotion-emoji">🚀</span>
+                        <span class="emotion-text">Confident, autonomous</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pain Points Row -->
+            <div class="swimlane-row pain-points">
+                <div class="swimlane-label">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </span>
+                    Pain Points
+                </div>
+                <div class="swimlane-cell">
+                    <div class="pain-item">Radio silence after offer</div>
+                    <div class="pain-item">No clear Day 1 plan</div>
+                    <div class="pain-item">Equipment not ready</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="pain-item">Information overload</div>
+                    <div class="pain-item">No one expecting them</div>
+                    <div class="pain-item">Hours of paperwork</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="pain-item">Sink or swim mentality</div>
+                    <div class="pain-item">Unclear expectations</div>
+                    <div class="pain-item">No system access</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="pain-item">Training disconnected</div>
+                    <div class="pain-item">No practice time</div>
+                    <div class="pain-item">Manager too busy</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="pain-item">Thrown into deep end</div>
+                    <div class="pain-item">No feedback given</div>
+                    <div class="pain-item">Mistakes punished</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="pain-item">No review conducted</div>
+                    <div class="pain-item">Unclear career path</div>
+                    <div class="pain-item">Still asking basics</div>
+                </div>
+            </div>
+
+            <!-- L&D Interventions Row -->
+            <div class="swimlane-row interventions">
+                <div class="swimlane-label">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </span>
+                    L&D Fixes
+                </div>
+                <div class="swimlane-cell">
+                    <div class="intervention-item">Automated drip campaign</div>
+                    <div class="intervention-item">Preboarding checklist</div>
+                    <div class="intervention-item">Day 1 agenda sent</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="intervention-item">Structured schedule</div>
+                    <div class="intervention-item">Welcome experience</div>
+                    <div class="intervention-item">Digital paperwork</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="intervention-item">Learning path in LMS</div>
+                    <div class="intervention-item">Buddy program</div>
+                    <div class="intervention-item">Manager toolkit</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="intervention-item">Blended learning</div>
+                    <div class="intervention-item">Scenario practice</div>
+                    <div class="intervention-item">Checkin cadence</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="intervention-item">Graduated complexity</div>
+                    <div class="intervention-item">Coaching sessions</div>
+                    <div class="intervention-item">Peer learning</div>
+                </div>
+                <div class="swimlane-cell">
+                    <div class="intervention-item">Formal 90 day review</div>
+                    <div class="intervention-item">IDP creation</div>
+                    <div class="intervention-item">Alumni connection</div>
+                </div>
+            </div>
+
+            <!-- Metrics Row -->
+            <div class="swimlane-row metrics">
+                <div class="swimlane-label">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"/>
+                            <line x1="12" y1="20" x2="12" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                    </span>
+                    Metrics
+                </div>
+                <div class="swimlane-cell">
+                    <span class="metric-item">Offer accept %</span>
+                    <span class="metric-item">No-show rate</span>
+                </div>
+                <div class="swimlane-cell">
+                    <span class="metric-item">Day 1 NPS</span>
+                    <span class="metric-item">Setup complete</span>
+                </div>
+                <div class="swimlane-cell">
+                    <span class="metric-item">Compliance done</span>
+                    <span class="metric-item">System access</span>
+                </div>
+                <div class="swimlane-cell">
+                    <span class="metric-item">Cert completion</span>
+                    <span class="metric-item">Assessment scores</span>
+                </div>
+                <div class="swimlane-cell">
+                    <span class="metric-item">Quality scores</span>
+                    <span class="metric-item">Task completion</span>
+                </div>
+                <div class="swimlane-cell">
+                    <span class="metric-item">Time to productivity</span>
+                    <span class="metric-item">90 day retention</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-left">
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-dot pain"></span>
+                        Common failures
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot intervention"></span>
+                        Best practice fixes
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot metric"></span>
+                        Success metrics
+                    </div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="author-name">Josh Stringer</div>
+                <div class="author-title">L&D Leader • Learning Architect</div>
+                <div class="contact-link">josh.stringer62@gmail.com</div>
+            </div>
+        </footer>
+    </div>
+
+    <footer class="site-footer">
+        <div class="site-footer-links">
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="how-i-work.html">How I Work</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://www.linkedin.com/in/josh-stringer/" target="_blank">LinkedIn</a>
+        </div>
+        <p class="site-footer-copy">Joshua Stringer · Gilbert, AZ · josh.stringer62@gmail.com</p>
+        <p class="site-footer-copyright">© 2025 Joshua Stringer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Ownership fingerprint
+        console.log('%c🔒 This site is the intellectual property of Joshua Stringer', 'font-size: 14px; font-weight: bold; color: #4ecb8d;');
+        console.log('%cUnique ID: JSTR-2025-ONB-Y1Z2A3 | © 2025 All Rights Reserved', 'font-size: 11px; color: #888;');
+        console.log('%cUnauthorized copying or reproduction is prohibited.', 'font-size: 11px; color: #e85c5c;');
+        console.log('%cContact: josh.stringer62@gmail.com', 'font-size: 11px; color: #888;');
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# robots.txt for jstringer.com
+# Joshua Stringer Portfolio
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://jstringer.com/sitemap.xml

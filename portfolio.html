@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  JOSHUA STRINGER - PORTFOLIO WEBSITE
+  ============================================================================
+
+  Copyright (c) 2025 Joshua Stringer. All rights reserved.
+
+  This source code and design are the intellectual property of Joshua Stringer.
+  Unauthorized copying, modification, distribution, or use of this code,
+  design, or any derivative works is strictly prohibited without explicit
+  written permission from the author.
+
+  Contact: josh.stringer62@gmail.com
+  LinkedIn: linkedin.com/in/josh-stringer
+
+  ============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Joshua Stringer</title>
+    <meta name="description" content="L&D portfolio: AI content pipelines, ROI frameworks, onboarding journey maps, and maturity models.">
+    <meta name="author" content="Joshua Stringer">
+    <meta name="copyright" content="Copyright (c) 2025 Joshua Stringer. All rights reserved.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jstringer.com/portfolio.html">
+    <meta property="og:title" content="Portfolio | Joshua Stringer">
+    <meta property="og:description" content="L&D portfolio: AI content pipelines, ROI frameworks, onboarding journey maps, and maturity models.">
+    <meta property="og:image" content="https://jstringer.com/profile-headshot.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ3Y65TGTY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DQ3Y65TGTY');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page Header */
+        .page-header {
+            padding: 140px 40px 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        /* Portfolio List */
+        .portfolio {
+            padding: 0 40px 120px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            gap: 56px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-default);
+            padding: 44px 0;
+        }
+
+        .portfolio-item:first-child {
+            padding-top: 0;
+        }
+
+        .portfolio-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-content {
+            min-width: 0;
+        }
+
+        .item-category {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--human-color);
+            margin-bottom: 14px;
+        }
+
+        .item-title {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .item-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .item-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s ease;
+        }
+
+        .item-link:hover {
+            gap: 12px;
+        }
+
+        /* Featured tag */
+        .featured-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-left: 14px;
+            vertical-align: middle;
+        }
+
+        /* Preview thumbnails */
+        .item-preview {
+            width: 260px;
+            height: 170px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .preview-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .preview-stat {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .preview-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* Preview variations */
+        .preview-pipeline {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .preview-pipeline .stage {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .preview-pipeline .stage.ai { background: rgba(107, 159, 255, 0.2); }
+        .preview-pipeline .stage.human { background: rgba(232, 168, 76, 0.2); }
+        .preview-pipeline .arrow { color: var(--text-muted); font-size: 10px; }
+
+        .preview-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 100%;
+        }
+
+        .preview-levels .level {
+            height: 8px;
+            border-radius: 4px;
+            opacity: 0.8;
+        }
+
+        .preview-levels .l1 { background: var(--negative); width: 40%; }
+        .preview-levels .l2 { background: var(--human-color); width: 60%; }
+        .preview-levels .l3 { background: var(--ai-color); width: 80%; }
+        .preview-levels .l4 { background: var(--accent); width: 100%; }
+
+        .preview-journey {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .preview-journey .bar {
+            width: 20px;
+            border-radius: 4px 4px 0 0;
+            background: var(--accent);
+            opacity: 0.6;
+        }
+
+        .preview-journey .bar:nth-child(1) { height: 20px; }
+        .preview-journey .bar:nth-child(2) { height: 35px; }
+        .preview-journey .bar:nth-child(3) { height: 50px; }
+        .preview-journey .bar:nth-child(4) { height: 65px; }
+        .preview-journey .bar:nth-child(5) { height: 80px; }
+        .preview-journey .bar:nth-child(6) { height: 95px; opacity: 1; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .page-header { padding: 100px 24px 40px; }
+            .page-title { font-size: 36px; }
+            .portfolio { padding: 0 24px 80px; }
+            .portfolio-item {
+                grid-template-columns: 1fr;
+                gap: 28px;
+                padding: 36px 0;
+            }
+            .item-preview {
+                width: 100%;
+                height: 140px;
+                order: -1;
+            }
+            .item-title { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ownership Watermark - JSTR-2025-PRT-D4E5F6 -->
+    <div data-owner="joshua-stringer" data-site-id="jstr-2025-prt" data-created="2025" aria-hidden="true" style="display:none!important"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">Josh Stringer</a>
+        <ul class="nav-links">
+            <li class="nav-dropdown">
+                <a href="portfolio.html" class="active">Portfolio</a>
+                <div class="dropdown-menu">
+                    <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="dropdown-label">Case Study</span></a>
+                    <a href="portfolio-roi.html">The ROI Question<span class="dropdown-label">Framework</span></a>
+                    <a href="portfolio-maturity.html">L&D Maturity Model<span class="dropdown-label">Diagnostic</span></a>
+                    <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="dropdown-label">Journey Map</span></a>
+                </div>
+            </li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="how-i-work.html">How I Work</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Get in touch</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="portfolio.html">Portfolio</a>
+        <a href="portfolio-ai-pipeline.html">AI Content Pipeline<span class="mobile-dropdown-label">Case Study</span></a>
+        <a href="portfolio-roi.html">The ROI Question<span class="mobile-dropdown-label">Framework</span></a>
+        <a href="portfolio-maturity.html">L&D Maturity Model<span class="mobile-dropdown-label">Diagnostic</span></a>
+        <a href="portfolio-onboarding.html">Onboarding Journey Map<span class="mobile-dropdown-label">Journey Map</span></a>
+        <a href="about.html">About</a>
+        <a href="how-i-work.html">How I Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">Portfolio</h1>
+        <p class="page-subtitle">Work samples organized by the problems they solve.</p>
+    </header>
+
+    <!-- Portfolio List -->
+    <section class="portfolio">
+
+        <!-- AI Pipeline -->
+        <article class="portfolio-item">
+            <div class="item-content">
+                <div class="item-category">Content takes forever to produce</div>
+                <h2 class="item-title">AI Content Pipeline<span class="featured-tag">Featured</span></h2>
+                <p class="item-desc">
+                    How I built workflows that cut module production from 40+ hours to under 10. Eight stages, AI verification loops, same team. 4x the output.
+                </p>
+                <a href="portfolio-ai-pipeline.html" class="item-link">View case study →</a>
+            </div>
+            <div class="item-preview">
+                <div class="preview-content">
+                    <div class="preview-stat">75%</div>
+                    <div class="preview-label">time reduction</div>
+                    <div class="preview-pipeline" style="margin-top: 12px;">
+                        <span class="stage ai">🤖</span>
+                        <span class="arrow">→</span>
+                        <span class="stage human">👤</span>
+                        <span class="arrow">→</span>
+                        <span class="stage ai">🤖</span>
+                        <span class="arrow">→</span>
+                        <span class="stage human">✓</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ROI Question -->
+        <article class="portfolio-item">
+            <div class="item-content">
+                <div class="item-category">Can't prove training ROI</div>
+                <h2 class="item-title">The ROI Question</h2>
+                <p class="item-desc">
+                    Framework for moving beyond completion metrics to business impact. Practical measurement methods and a dashboard showing what mature L&D analytics looks like.
+                </p>
+                <a href="portfolio-roi.html" class="item-link">View framework →</a>
+            </div>
+            <div class="item-preview">
+                <div class="preview-content">
+                    <div class="preview-stat" style="color: var(--human-color);">767%</div>
+                    <div class="preview-label">sample ROI calculation</div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Maturity Model -->
+        <article class="portfolio-item">
+            <div class="item-content">
+                <div class="item-category">Tools everywhere, insights nowhere</div>
+                <h2 class="item-title">L&D Technology Maturity Model</h2>
+                <p class="item-desc">
+                    Diagnostic tool showing four stages of L&D technology maturity. From "we don't know who's trained" to "L&D drives business results." Includes assessment questions.
+                </p>
+                <a href="portfolio-maturity.html" class="item-link">View model →</a>
+            </div>
+            <div class="item-preview">
+                <div class="preview-content" style="width: 100%;">
+                    <div class="preview-levels">
+                        <div class="level l4"></div>
+                        <div class="level l3"></div>
+                        <div class="level l2"></div>
+                        <div class="level l1"></div>
+                    </div>
+                    <div class="preview-label" style="margin-top: 12px;">4 maturity levels</div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Journey Map -->
+        <article class="portfolio-item">
+            <div class="item-content">
+                <div class="item-category">Onboarding isn't sticking</div>
+                <h2 class="item-title">New Hire Onboarding Journey Map</h2>
+                <p class="item-desc">
+                    Onboarding framework covering the first 90 days. Maps touchpoints, emotions, pain points, and L&D interventions across six stages.
+                </p>
+                <a href="portfolio-onboarding.html" class="item-link">View journey map →</a>
+            </div>
+            <div class="item-preview">
+                <div class="preview-content">
+                    <div class="preview-journey">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                    <div class="preview-label" style="margin-top: 12px;">6 stages over 90 days</div>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="how-i-work.html">How I Work</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://www.linkedin.com/in/josh-stringer/" target="_blank">LinkedIn</a>
+        </div>
+        <p class="footer-copy">Joshua Stringer · Gilbert, AZ · josh.stringer62@gmail.com</p>
+        <p class="footer-copyright">© 2025 Joshua Stringer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Ownership fingerprint
+        console.log('%c🔒 This site is the intellectual property of Joshua Stringer', 'font-size: 14px; font-weight: bold; color: #4ecb8d;');
+        console.log('%cUnique ID: JSTR-2025-PRT-D4E5F6 | © 2025 All Rights Reserved', 'font-size: 11px; color: #888;');
+        console.log('%cUnauthorized copying or reproduction is prohibited.', 'font-size: 11px; color: #e85c5c;');
+        console.log('%cContact: josh.stringer62@gmail.com', 'font-size: 11px; color: #888;');
+    </script>
+</body>
+</html>
