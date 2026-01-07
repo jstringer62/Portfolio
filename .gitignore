@@ -10,3 +10,11 @@ Thumbs.db
 *.swo
 .vscode/
 .idea/
+
+# Node.js
+node_modules/
+
+# Social card development files (keep only PNG outputs)
+social-cards/preview-*.html
+social-cards/capture-screenshots.js
+social-cards/package*.json
