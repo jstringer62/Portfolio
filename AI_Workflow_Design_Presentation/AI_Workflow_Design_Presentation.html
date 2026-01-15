@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Enabled Workflow Design | Joshua Stringer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-tertiary: #27272a;
+            --bg-elevated: #3f3f46;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --border-light: #3f3f46;
+            --accent: #22d3ee;
+            --accent-dim: rgba(34, 211, 238, 0.15);
+            --human: #10b981;
+            --human-dim: rgba(16, 185, 129, 0.15);
+            --ai: #8b5cf6;
+            --ai-dim: rgba(139, 92, 246, 0.15);
+            --hybrid: #f59e0b;
+            --hybrid-dim: rgba(245, 158, 11, 0.15);
+            --sme: #ec4899;
+            --sme-dim: rgba(236, 72, 153, 0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --header-height: 68px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .app {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .meta-item {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .meta-item strong {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .author-tag {
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0 2rem;
+            height: 52px;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: var(--header-height);
+            z-index: 99;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 0 1rem;
+            height: 36px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab:hover {
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+        }
+
+        .tab.active {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--border-light);
+        }
+
+        .tab-num {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+        }
+
+        .tab.active .tab-num {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        /* Main Content Area */
+        .content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        .panel > .section-header:first-child {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 0.35rem 0.75rem;
+            border-radius: 100px;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 700px;
+        }
+
+        /* Workflow Diagram */
+        .workflow {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .workflow-phases {
+            display: flex;
+            gap: 1rem;
+            min-width: max-content;
+        }
+
+        .workflow-phase {
+            flex: 1;
+            min-width: 260px;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .workflow-phase:hover {
+            border-color: var(--border-light);
+        }
+
+        .workflow-phase.clickable:hover {
+            border-color: var(--accent);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .phase-num {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-dim);
+            color: var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .phase-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .phase-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mini-step {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .mini-step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .mini-step-dot.human { background: var(--human); }
+        .mini-step-dot.ai { background: var(--ai); }
+        .mini-step-dot.hybrid { background: var(--hybrid); }
+        .mini-step-dot.sme { background: var(--sme); }
+
+        .mini-step-name {
+            color: var(--text-secondary);
+        }
+
+        .workflow-legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.human { background: var(--human); }
+        .legend-dot.ai { background: var(--ai); }
+        .legend-dot.hybrid { background: var(--hybrid); }
+        .legend-dot.sme { background: var(--sme); }
+
+        .click-hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Callout */
+        .callout {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-sm);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .callout p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .callout.warning {
+            border-left-color: var(--hybrid);
+        }
+
+        .callout.success {
+            border-left-color: var(--human);
+        }
+
+        /* Grid Layout for Steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.25rem;
+            transition: border-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-card:hover {
+            border-color: var(--border-light);
+        }
+
+        .step-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.75rem;
+            height: 48px;
+        }
+
+        .step-num {
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            flex: 1;
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .step-tag {
+            flex-shrink: 0;
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .step-num.human { background: var(--human-dim); color: var(--human); }
+        .step-num.ai { background: var(--ai-dim); color: var(--ai); }
+        .step-num.hybrid { background: var(--hybrid-dim); color: var(--hybrid); }
+
+        .step-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .step-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .step-tag.human { background: var(--human-dim); color: var(--human); }
+        .step-tag.ai { background: var(--ai-dim); color: var(--ai); }
+        .step-tag.hybrid { background: var(--hybrid-dim); color: var(--hybrid); }
+        .step-tag.sme { background: var(--sme-dim); color: var(--sme); }
+
+        .step-content {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: var(--text-primary);
+        }
+
+        .step-note {
+            margin-top: auto;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Tables */
+        .table-wrap {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 1.25rem;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: var(--bg-tertiary);
+        }
+
+        .tag-high { color: var(--human); font-weight: 600; }
+        .tag-moderate { color: var(--hybrid); font-weight: 600; }
+        .tag-low { color: var(--text-muted); font-weight: 600; }
+
+        /* Lists */
+        .list-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .list-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .styled-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .styled-list li {
+            display: flex;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .styled-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .styled-list li strong {
+            color: var(--text-primary);
+        }
+
+        .numbered-list {
+            list-style: none;
+            counter-reset: item;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .numbered-list li {
+            display: flex;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            counter-increment: item;
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            width: 22px;
+            height: 22px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .numbered-list li strong {
+            color: var(--text-primary);
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .two-col > .callout,
+        .two-col > .list-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .two-col > .callout p,
+        .two-col > .list-section .styled-list {
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Nav hint */
+        .nav-hint {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--border-light);
+        }
+
+        .nav-btn.hidden {
+            visibility: hidden;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            :root {
+                --header-height: 60px;
+            }
+
+            .header {
+                flex-direction: row;
+                gap: 1rem;
+                padding: 0 1rem;
+                height: var(--header-height);
+            }
+
+            .header-meta {
+                display: none;
+            }
+
+            .tabs {
+                padding: 0 1rem;
+                height: 48px;
+            }
+
+            .tab {
+                padding: 0 0.75rem;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+
+            .content {
+                padding: 1.5rem 1rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-phases {
+                flex-direction: column;
+            }
+
+            .workflow-phase {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">AI Workflow <span>Design</span></div>
+                <div class="header-meta">
+                    <div class="meta-item">For <strong>Director of AI Learning & Enablement</strong></div>
+                    <div class="meta-item">Context <strong>4-6hr pilot | 5 modules | External SMEs</strong></div>
+                </div>
+            </div>
+            <div class="author-tag">Joshua Stringer</div>
+        </header>
+
+        <!-- Tabs -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="overview">
+                Overview
+            </button>
+            <button class="tab" data-tab="phase1">
+                <span class="tab-num">1</span>Initiation & Scoping
+            </button>
+            <button class="tab" data-tab="phase2">
+                <span class="tab-num">2</span>Interview Preparation
+            </button>
+            <button class="tab" data-tab="phase3">
+                <span class="tab-num">3</span>SME Intake & Synthesis
+            </button>
+            <button class="tab" data-tab="phase4">
+                <span class="tab-num">4</span>Storyboard Development
+            </button>
+        </nav>
+
+        <!-- Content -->
+        <main class="content">
+            <!-- Overview Panel -->
+            <div id="overview" class="panel active">
+                <div class="section-header">
+                    <span class="section-label">Workflow Overview</span>
+                    <h1 class="section-title">End-to-End Process Architecture</h1>
+                    <p class="section-desc">A four-phase workflow where humans own every decision point. AI accelerates execution, not decisions.</p>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-phases">
+                        <div class="workflow-phase clickable" data-target="phase1">
+                            <div class="phase-header">
+                                <span class="phase-num">1</span>
+                                <span class="phase-title">Initiation & Scoping</span>
+                            </div>
+                            <div class="phase-steps">
+                                <div class="mini-step"><span class="mini-step-dot human"></span><span class="mini-step-name">Leadership Kickoff</span></div>
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">Outline Generation</span></div>
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">L&D Validation</span></div>
+                                <div class="mini-step"><span class="mini-step-dot human"></span><span class="mini-step-name">Leadership Approval</span></div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-phase clickable" data-target="phase2">
+                            <div class="phase-header">
+                                <span class="phase-num">2</span>
+                                <span class="phase-title">Interview Preparation</span>
+                            </div>
+                            <div class="phase-steps">
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">Question Generation</span></div>
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">Host Guide Preparation</span></div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-phase clickable" data-target="phase3">
+                            <div class="phase-header">
+                                <span class="phase-num">3</span>
+                                <span class="phase-title">SME Intake & Synthesis</span>
+                            </div>
+                            <div class="phase-steps">
+                                <div class="mini-step"><span class="mini-step-dot hybrid"></span><span class="mini-step-dot sme"></span><span class="mini-step-name">Interview → Synthesis → L&D</span></div>
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">Gap Reflection → Follow-up Qs</span></div>
+                                <div class="mini-step"><span class="mini-step-dot hybrid"></span><span class="mini-step-dot sme"></span><span class="mini-step-name">Follow-up Interview</span></div>
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">Combined Synthesis → L&D</span></div>
+                                <div class="mini-step"><span class="mini-step-dot human"></span><span class="mini-step-name">Learning Scientist Review</span></div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-phase clickable" data-target="phase4">
+                            <div class="phase-header">
+                                <span class="phase-num">4</span>
+                                <span class="phase-title">Storyboard Development</span>
+                            </div>
+                            <div class="phase-steps">
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">Structure Generation</span></div>
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">L&D Validation</span></div>
+                                <div class="mini-step"><span class="mini-step-dot ai"></span><span class="mini-step-name">Draft Generation</span></div>
+                                <div class="mini-step"><span class="mini-step-dot human"></span><span class="mini-step-name">Learning Scientist Review</span></div>
+                                <div class="mini-step"><span class="mini-step-dot sme"></span><span class="mini-step-dot human"></span><span class="mini-step-name">SME + Learning Scientist</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-legend">
+                        <div class="legend-item"><span class="legend-dot human"></span>Human Gate</div>
+                        <div class="legend-item"><span class="legend-dot ai"></span>AI Processing</div>
+                        <div class="legend-item"><span class="legend-dot hybrid"></span>Human + AI</div>
+                        <div class="legend-item"><span class="legend-dot sme"></span>SME Input</div>
+                    </div>
+
+                    <div class="click-hint">Click any phase to view details</div>
+                </div>
+
+                <!-- Why This Works -->
+                <div class="section-header" style="margin-top: 2.5rem;">
+                    <span class="section-label">Why This Works</span>
+                    <h2 class="section-title" style="font-size: 1.4rem;">Three Core Principles</h2>
+                </div>
+
+                <div class="steps-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 2rem;">
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num" style="background: var(--sme-dim); color: var(--sme);">1</span>
+                            <span class="step-title">SME Intake Optimization</span>
+                        </div>
+                        <div class="step-content">
+                            Interviews guided by AI let <strong>any trained interviewer</strong> capture expert quality content. Senior staff review outputs instead of attending every session. SMEs provide expertise; AI handles structure and gaps.
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">2</span>
+                            <span class="step-title">AI-Enabled Storyboarding</span>
+                        </div>
+                        <div class="step-content">
+                            Initial storyboards within <strong>strict guardrails</strong>: template enforcement, objective anchoring, confidence flagging. Every output traces to SME input. No hallucination, nothing without purpose.
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num human">3</span>
+                            <span class="step-title">Adult Learning Alignment</span>
+                        </div>
+                        <div class="step-content">
+                            Grounded in andragogy: <strong>Need to Know, Problem Centered, Experience Based.</strong> AI accelerates execution, not decisions. Full designer override authority.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">The Foundation</div>
+                    <p>The quality of SME intake sets the ceiling for everything downstream. AI cannot rescue poorly captured source material. It can only accelerate well-structured inputs. This makes intake the <strong>highest-leverage point</strong> for human involvement.</p>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-title">The Problem This Solves</div>
+                    <p>Senior staff often attend SME meetings because junior team members lack expertise to know what questions to ask. This workflow enables <strong>any trained interviewer</strong> to conduct quality intake, with Directors reviewing outputs rather than attending every session. Once proven, portions of the workflow can be further automated.</p>
+                </div>
+
+                <div class="callout success">
+                    <div class="callout-title">What Gets Captured</div>
+                    <p>SMEs provide what AI can't: misconceptions, edge cases, what mastery looks like.<br>AI handles the rest: sequencing, structure, gap detection.<br>A <strong>Host Guide</strong> walks any interviewer through questions adapted to the domain and tied to objectives.</p>
+                </div>
+
+                <div class="nav-hint">
+                    <button class="nav-btn hidden">← Previous</button>
+                    <button class="nav-btn" data-target="phase1">Next: Initiation & Scoping →</button>
+                </div>
+            </div>
+
+            <!-- Phase 1: Initiation & Scoping -->
+            <div id="phase1" class="panel">
+                <div class="section-header">
+                    <span class="section-label">Phase 1</span>
+                    <h1 class="section-title">Initiation & Scoping</h1>
+                    <p class="section-desc">Before any SME time is scheduled, scope must be defined, validated, and approved. This phase ensures everyone is aligned on what we're building and how success will be measured.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num human">1</span>
+                            <span class="step-title">Leadership Kickoff</span>
+                            <span class="step-tag human">Human</span>
+                        </div>
+                        <div class="step-content">Leadership provides the starting inputs: goals, topics, target audience, course parameters, and any known constraints. <strong>Critically, this must include how knowledge transfer will be measured</strong>: post-course assessments, certifications, on-the-job metrics? These requirements shape assessment design throughout.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">2</span>
+                            <span class="step-title">Outline Generation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">AI agent builds an initial course outline from leadership's input: module structure, high-level objectives, and target outcomes.</div>
+                        <div class="step-note"><strong>Domain adaptation:</strong> Outline structure adapts to the domain. Accounting courses need regulatory constraints and calculation logic; clinical courses need patient scenarios and decision trees.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">3</span>
+                            <span class="step-title">L&D Validation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">L&D Agent validates learning design methodology and defines where assessments occur in the structure, linked to objectives. This shapes interview questions (what does mastery look like for each objective?).</div>
+                        <div class="step-note"><strong>Confidence flagging:</strong> Low-confidence sections marked for human review before proceeding.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num human">4</span>
+                            <span class="step-title">Leadership Approval</span>
+                            <span class="step-tag human">Human</span>
+                        </div>
+                        <div class="step-content">Leadership approves the validated outline as the starting point. Depending on training size, this outline may be broken down further before proceeding to interview preparation.</div>
+                    </div>
+                </div>
+
+                <div class="callout success">
+                    <div class="callout-title">Why This Matters</div>
+                    <p>This phase defines scope and assessment strategy before SME time is scheduled. The interviewer enters knowing what objectives to probe and what mastery should look like, not open-ended exploration.</p>
+                </div>
+
+                <div class="nav-hint">
+                    <button class="nav-btn" data-target="overview">← Back to Overview</button>
+                    <button class="nav-btn" data-target="phase2">Next: Interview Preparation →</button>
+                </div>
+            </div>
+
+            <!-- Phase 2: Interview Preparation -->
+            <div id="phase2" class="panel">
+                <div class="section-header">
+                    <span class="section-label">Phase 2</span>
+                    <h1 class="section-title">Interview Preparation</h1>
+                    <p class="section-desc">AI prepares the interview framework so any trained interviewer can conduct a high-quality SME session, freeing Directors from routine meetings.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">5</span>
+                            <span class="step-title">Question Generation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">Interview Expert Agent crafts questions to maximize topic coverage and address approved goals from Phase 1.</div>
+                        <div class="step-note"><strong>Question types:</strong> Conceptual (what/why), procedural (how), edge cases (what if), and mastery definition (what does good look like).</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">6</span>
+                            <span class="step-title">Host Guide Preparation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">Questions structured into a guided interview flow. The Host Guide walks the interviewer through each question, prompts follow-ups, and captures responses for downstream use.</div>
+                        <div class="step-note"><strong>Format options:</strong> Static document (ensures all questions answered) or live AI interface with step-by-step pages (more flexible, real-time guidance).</div>
+                    </div>
+                </div>
+
+                <div class="two-col">
+                    <div class="callout" style="margin-bottom: 0;">
+                        <div class="callout-title">The Value of AI-Guided Interviews</div>
+                        <p>This approach enables <strong>any trained interviewer</strong> to conduct expert-level SME sessions. The AI knows what questions to ask; the human builds rapport and captures nuance. Directors review outputs rather than attending every meeting.</p>
+                    </div>
+
+                    <div class="callout warning" style="margin-bottom: 0;">
+                        <div class="callout-title">A Note on Automation</div>
+                        <p>While further automation is possible (AI conducting interviews directly, fully automated question flows), the recommendation is to <strong>start with humans in the loop</strong> and document the nuances that emerge. Once the process is refined and edge cases are well-understood, selective automation can be explored, but human judgment in live SME interactions captures subtleties that pure automation may miss.</p>
+                    </div>
+                </div>
+
+                <div class="nav-hint">
+                    <button class="nav-btn" data-target="phase1">← Phase 1: Initiation</button>
+                    <button class="nav-btn" data-target="phase3">Next: SME Intake & Synthesis →</button>
+                </div>
+            </div>
+
+            <!-- Phase 3: SME Intake & Synthesis -->
+            <div id="phase3" class="panel">
+                <div class="section-header">
+                    <span class="section-label">Phase 3</span>
+                    <h1 class="section-title">SME Intake & Synthesis</h1>
+                    <p class="section-desc">An iterative intake loop: interview, synthesize, identify gaps, follow up with SME, then combine and validate. This ensures comprehensive capture before storyboarding.</p>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">The Iterative Loop</div>
+                    <p>A single pass rarely captures everything. This phase builds in a structured feedback loop: <strong>Interview → Synthesize → Reflect on gaps → Generate follow-up questions → Address gaps (same session or scheduled follow-up) → Combine → Validate</strong>. The goal is to surface and address gaps early, not discover them during storyboarding.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num hybrid">7</span>
+                            <span class="step-title">SME Interview (Initial)</span>
+                            <span class="step-tag hybrid">Human + AI</span>
+                            <span class="step-tag sme">SME</span>
+                        </div>
+                        <div class="step-content">The interviewer conducts the initial SME session with AI guidance. The Host Guide prompts each question, captures responses in real-time, and flags unexplored areas.</div>
+                        <div class="step-note"><strong>Recording:</strong> Tools like Otter.ai, Fireflies.ai, Read AI, or MeetGeek provide live transcripts that feed directly into synthesis.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">8</span>
+                            <span class="step-title">Initial Synthesis</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">AI synthesizes captured information and structures it to <strong>surface gaps</strong>: missing topics, incomplete explanations, areas that need deeper probing.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">9</span>
+                            <span class="step-title">L&D Adaptation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">L&D Agent restructures content for proper methodology and flags where principles need strengthening. Also checks if SME revealed new assessment opportunities not in the original structure.</div>
+                        <div class="step-note"><strong>Confidence flagging:</strong> Low-confidence sections marked for human review.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">10</span>
+                            <span class="step-title">Gap Reflection</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">A Reflection Agent compiles gaps from both the Synthesis Agent (content gaps) and the L&D Agent (methodology gaps) into a consolidated gap report.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">11</span>
+                            <span class="step-title">Follow-up Q Generation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">Interview Expert Agent generates targeted follow-up questions to fill identified gaps. The interviewer reviews and selects which questions to use. This is the approval step.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num hybrid">12</span>
+                            <span class="step-title">Follow-up Questions</span>
+                            <span class="step-tag hybrid">Human + AI</span>
+                            <span class="step-tag sme">SME</span>
+                        </div>
+                        <div class="step-content">Targeted follow-up to address identified gaps. This could be a <strong>separate session</strong> scheduled later, or a <strong>continuation of the same meeting</strong> after a brief break while AI processes and generates follow-up questions. Flexibility depends on SME availability and gap complexity.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">13</span>
+                            <span class="step-title">Combined Synthesis</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">AI merges both interview data sets into a unified, comprehensive synthesis, filling gaps from Session 1 with content from Session 2.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">14</span>
+                            <span class="step-title">Final L&D Validation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">L&D Agent performs final validation on combined synthesis. Confirms learning design standards met and ready for human review.</div>
+                        <div class="step-note"><strong>Confidence flagging:</strong> Low-confidence sections highlighted for Learning Scientist attention.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num human">15</span>
+                            <span class="step-title">L&D Scientist Review</span>
+                            <span class="step-tag human">Human</span>
+                        </div>
+                        <div class="step-content">Learning Scientist reviews the text-based synthesis: objectives scoped for time, all content tied to objectives (nothing floating without purpose). If issues found, they edit directly. Approved version moves to storyboarding.</div>
+                        <div class="step-note"><strong>Future enhancement:</strong> AI-assisted editing tools could speed up revisions at this stage.</div>
+                    </div>
+                </div>
+
+                <div class="two-col" style="margin-top: 1.5rem;">
+                    <div class="list-section" style="margin-bottom: 0; border-left: 3px solid var(--sme);">
+                        <div class="list-title">Must Come From SMEs</div>
+                        <ul class="styled-list">
+                            <li>Common misconceptions learners have</li>
+                            <li>Edge cases and exceptions to rules</li>
+                            <li>Real-world scenarios and examples</li>
+                            <li>Domain-specific constraints (regulatory, technical)</li>
+                            <li>What mastery actually looks like</li>
+                            <li>Why things are done a certain way</li>
+                        </ul>
+                    </div>
+                    <div class="list-section" style="margin-bottom: 0; border-left: 3px solid var(--ai);">
+                        <div class="list-title">AI Can Infer or Generate</div>
+                        <ul class="styled-list">
+                            <li>What order to teach things (teach A before B)</li>
+                            <li>What learners need to know before starting</li>
+                            <li>Linking related concepts together</li>
+                            <li>Draft quiz questions (humans validate accuracy)</li>
+                            <li>Formatting content into templates</li>
+                            <li>Spotting what's missing or incomplete</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">Input Sources</div>
+                    <p>Leadership (Phase 1) defines objectives, constraints, and how success is measured. SMEs provide the expertise: misconceptions, edge cases, real-world scenarios. AI assists with structuring, sequencing, and drafting supplementary content.</p>
+                </div>
+
+                <div class="nav-hint">
+                    <button class="nav-btn" data-target="phase2">← Phase 2: Interview Prep</button>
+                    <button class="nav-btn" data-target="phase4">Next: Storyboard Development →</button>
+                </div>
+            </div>
+
+            <!-- Phase 4: Storyboard Development -->
+            <div id="phase4" class="panel">
+                <div class="section-header">
+                    <span class="section-label">Phase 4</span>
+                    <h1 class="section-title">Storyboard Development</h1>
+                    <p class="section-desc">AI generates first-pass storyboards within strict guardrails. Humans validate instructional integrity and alignment to adult learning principles.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">16</span>
+                            <span class="step-title">Structure Generation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">AI builds the storyboard skeleton from validated synthesis: module flow, section breaks, content placement. Follows approved templates exactly.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">17</span>
+                            <span class="step-title">L&D Validation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">L&D Agent validates structure against learning design methodologies: scaffolding, cognitive load, assessment alignment. Flags issues before draft generation.</div>
+                        <div class="step-note"><strong>Confidence flagging:</strong> Low-confidence sections marked for Learning Scientist review.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num ai">18</span>
+                            <span class="step-title">Draft Generation</span>
+                            <span class="step-tag ai">AI</span>
+                        </div>
+                        <div class="step-content">AI populates the structure with first-pass content: explanations, examples, assessment items. Every block traces to an objective; gaps flagged, not filled with fluff.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num human">19</span>
+                            <span class="step-title">L&D Scientist Review</span>
+                            <span class="step-tag human">Human</span>
+                        </div>
+                        <div class="step-content">Learning Scientist reviews the draft for tone, cognitive load, instructional flow. Rewrites where needed. Full override authority. AI suggestions are starting points, not decisions.</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-num" style="background: var(--sme-dim); color: var(--sme);">20</span>
+                            <span class="step-title">SME + L&D Review</span>
+                            <span class="step-tag sme">SME</span>
+                            <span class="step-tag human">Human</span>
+                        </div>
+                        <div class="step-content">SME validates technical accuracy; Learning Scientist ensures instructional flow. Can happen together or separately. If SME corrections affect structure, iterate until both approve.</div>
+                    </div>
+                </div>
+
+                <div class="list-section" style="margin-top: 1.5rem; border-left: 3px solid var(--hybrid);">
+                    <div class="list-title">Guardrails Against Low-Quality Outputs</div>
+                    <ul class="styled-list">
+                        <li><strong>Template enforcement:</strong> AI outputs conform to approved structure; no freeform generation</li>
+                        <li><strong>Objective anchoring:</strong> Every content block traces to an objective; unlinked content flagged</li>
+                        <li><strong>Confidence thresholds:</strong> Low-confidence sections marked for mandatory human review</li>
+                        <li><strong>No silent failures:</strong> AI surfaces gaps rather than generating placeholder content</li>
+                    </ul>
+                </div>
+
+                <div class="list-section" style="border-left: 3px solid var(--human);">
+                    <div class="list-title">Adult Learning Alignment</div>
+                    <ul class="styled-list">
+                        <li><strong>Need to Know:</strong> Workflow captures why before what. Relevance designed in, not retrofitted</li>
+                        <li><strong>Experience:</strong> SME scenarios connect new content to real-world context learners recognize</li>
+                        <li><strong>Self-Direction:</strong> Clear objectives let learners track their own progress</li>
+                        <li><strong>Problem-Centered:</strong> Content organized around tasks and decisions, not abstract topics</li>
+                        <li><strong>Assessment Integration:</strong> Measurement requirements set in Phase 1; SMEs define mastery; every assessment maps to an objective</li>
+                    </ul>
+                </div>
+
+                <div class="nav-hint">
+                    <button class="nav-btn" data-target="phase3">← Phase 3: SME Intake</button>
+                    <button class="nav-btn" data-target="overview">Back to Overview →</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab switching
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.panel');
+        const navBtns = document.querySelectorAll('.nav-btn[data-target]');
+        const phaseBlocks = document.querySelectorAll('.workflow-phase[data-target]');
+
+        function switchTo(target) {
+            tabs.forEach(t => t.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+
+            const targetTab = document.querySelector(`.tab[data-tab="${target}"]`);
+            const targetPanel = document.getElementById(target);
+
+            if (targetTab) targetTab.classList.add('active');
+            if (targetPanel) targetPanel.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => switchTo(tab.dataset.tab));
+        });
+
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => switchTo(btn.dataset.target));
+        });
+
+        phaseBlocks.forEach(block => {
+            block.addEventListener('click', () => switchTo(block.dataset.target));
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const activeTab = document.querySelector('.tab.active');
+            const tabsArray = Array.from(tabs);
+            const currentIndex = tabsArray.indexOf(activeTab);
+
+            if (e.key === 'ArrowRight' && currentIndex < tabsArray.length - 1) {
+                tabsArray[currentIndex + 1].click();
+            } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                tabsArray[currentIndex - 1].click();
+            }
+        });
+    </script>
+</body>
+</html>
