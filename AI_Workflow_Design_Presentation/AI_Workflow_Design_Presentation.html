@@ -110,6 +110,25 @@
             color: var(--text-secondary);
         }
 
+        .portfolio-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+        }
+
+        .portfolio-link:hover {
+            color: var(--text-primary);
+            border-color: var(--border-light);
+            background: var(--bg-tertiary);
+        }
+
         /* Tab Navigation */
         .tabs {
             display: flex;
@@ -730,6 +749,7 @@
                     <div class="meta-item">Context <strong>4-6hr pilot | 5 modules | External SMEs</strong></div>
                 </div>
             </div>
+            <a href="https://jstringer.com/portfolio.html" class="portfolio-link">← Portfolio</a>
             <div class="author-tag">Joshua Stringer</div>
         </header>
 
